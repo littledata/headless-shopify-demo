@@ -8,6 +8,7 @@ Template.buyNow.onCreated(function() {
 
 Template.buyNow.events({
 	'click .buy-now': function(event, template) {
+		console.log('click')
 		const variantId = $(event.target).data('variant-id')
 		template.checkingOut.set(true)
 		const platform = 'google'
