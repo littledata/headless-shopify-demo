@@ -1,3 +1,4 @@
+import { $ } from 'meteor/jquery'
 import { getClientId } from './getClientId'
 import './buyNow.html'
 
@@ -6,10 +7,13 @@ Template.buyNow.onCreated(function() {
 	this.message = new ReactiveVar('')
 })
 
+Template.buyNow.helpers({
+	message: () => Template.instance().message.get(),
+})
+
 Template.buyNow.events({
 	'click .buy-now': function(event, template) {
-		console.log('click')
-		const variantId = $(event.target).data('variant-id')
+		const variantId = $(event.target).data('variant')
 		template.checkingOut.set(true)
 		const platform = 'google'
 		getClientId(platform)
@@ -18,7 +22,7 @@ Template.buyNow.events({
 					'createCheckout',
 					variantId,
 					clientId,
-					false,
+					platform,
 					(error, result) => {
 						template.checkingOut.set(false)
 						if (error) {
