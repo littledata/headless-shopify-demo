@@ -1,0 +1,110 @@
+@import '/client/css/colors.less';
+
+.buy-section {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	text-align: center;
+
+	@media (min-width: 1024px) {
+		justify-content: space-between;
+		text-align: left;
+	}
+
+	.player-container {
+		flex-basis: 100%;
+		max-width: 40rem;
+		margin: auto;
+		transition-property: flex-basis;
+		transition-duration: 0.3s;
+		transition-timing-function: ease-in-out;
+
+		@media (min-width: 1024px) {
+			flex-basis: 28rem;
+			max-width: none;
+			margin: 0;
+		}
+
+		.player {
+			width: 100%;
+			padding-top: 75%;
+			position: relative;
+			background-position: center;
+			background-size: contain;
+			background-repeat: no-repeat;
+		}
+	}
+
+	.content {
+		max-width: 40rem;
+		margin: 2rem auto 0;
+		cursor: pointer;
+		transition-property: flex-basis, margin;
+		transition-duration: 0.3s;
+		transition-timing-function: ease-in-out;
+
+		@media (min-width: 768px) {
+			margin-top: 3rem;
+		}
+
+		@media (min-width: 1024px) {
+			flex-basis: ~'calc(100% - 35.5rem)';
+			max-width: none;
+			margin: 0;
+		}
+	}
+}
+
+.faqs {
+	.faqs-items {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.faqs-item {
+		flex-basis: 100%;
+
+		max-width: 40em;
+		margin-left: auto;
+		margin-right: auto;
+
+		transition-property: flex-basis, margin-top;
+		transition-duration: 0.3s;
+		transition-timing-function: ease-in-out;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&.sub-section {
+			&.sub-panel {
+				margin-bottom: 0;
+			}
+		}
+
+		@media (min-width: 768px) {
+			flex-basis: calc(~'50% - 1.5em');
+			max-width: none;
+
+			margin-left: 0;
+			margin-right: 0;
+
+			&:nth-child(2) {
+				margin-top: 0;
+			}
+		}
+
+		.heading-section {
+			text-align: left;
+		}
+	}
+
+	.description {
+		br {
+			margin-top: 0;
+		}
+	}
+}

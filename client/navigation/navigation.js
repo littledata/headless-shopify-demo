@@ -1,3 +1,5 @@
+import { $ } from 'meteor/jquery'
+
 const navLinks = new ReactiveVar([
 	{
 		name: 'Go to Help Centre',
@@ -52,14 +54,6 @@ const sharedHelpers = {
 		return name === 'sign-up' || name === 'login'
 			? AppRootURL + this.link
 			: this.link
-	},
-	isActive() {
-		const { route } = Router.current()
-		const name = this.name.toLowerCase()
-		return route && route.getName().indexOf(name) > -1 ? 'active' : ''
-	},
-	hasDropdown() {
-		return this.dropdown && this.submenu && this.submenu.length
 	},
 	orderedSubmenu() {
 		const { submenu } = this

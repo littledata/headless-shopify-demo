@@ -1,16 +1,48 @@
 <template name="buyNow">
-	<div class="buy-section">
+	<div class="container">
+		<div class="buy-section">
 			<div id="play" class="player-container">
-				<img src="/img/headless.png">
+				<div class="player" style="background-image: url(/img/headless.png)"></div>
 			</div>
 			
 			<div class="content">
-				<h1>Test our 'headless' product</h1>
+				<h1>Buy a headless man</h1>
 				<div class="sub-section description">
-					Clicking here will add the {{idCalled}} ({{clientId}}) to the checkout 
+					{{#if message}}
+						{{message}}
+					{{else}}
+						This button will add the {{idCalled}} ({{clientId}}) from this page to the Shopify checkout
+					{{/if}}
 				</div>
-				<button class="button buy-now" data-color="accent" data-variant="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMDI5MzgwMTczMDExMA==">Buy Now</button>
-				{{message}}
+				<button class="button buy-now" data-color="accent" data-variant="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMDI5MzgwMTczMDExMA==">
+					{{#if checkingOut}}
+						{{>_barLoader}}
+					{{else}}
+						Buy Now
+					{{/if}}
+				</button>
+				
 			</div>
 		</div>
+	</div>
+	
+	<div id="faqs" class="row">
+		<div class="container">
+			<div class="section">
+				<div class="faqs">
+					<h1 class="text-center">{{heading}}</h1>
+					<div class="faqs-items sub-section sub-panel">
+						{{#each item in items}}
+							<div class="faqs-item sub-section sub-panel">
+								<h3>{{item.heading}}</h3>
+								<div class="description sub-section">
+									{{{item.description}}}
+								</div>
+							</div>
+						{{/each}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>

@@ -16,3 +16,4 @@ reactive-var
 twbs:bootstrap
 less@2.8.0
 autoupdate
+session

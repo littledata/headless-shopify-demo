@@ -2,20 +2,58 @@ import { $ } from 'meteor/jquery'
 import { getClientId } from './getClientId'
 import './buyNow.html'
 
+const idCalled = () =>
+	Session.get('platform') === 'google' ? 'client ID' : 'anonymous ID'
+
+const buildLink = (text, link) =>
+	`<a href="${link}" target="_blank">${text}</a>`
+
 Template.buyNow.onCreated(function() {
 	this.checkingOut = new ReactiveVar(false)
 	this.message = new ReactiveVar('')
-	this.platform = new ReactiveVar('google')
+	this.clientId = new ReactiveVar('')
+	const instance = this
+	instance.autorun(() => {
+		getClientId(Session.get('platform'))
+			.then(clientId => instance.clientId.set(clientId))
+			.catch(err => {
+				instance.message.set(err.message)
+			})
+	})
 })
 
 Template.buyNow.helpers({
 	message: () => Template.instance().message.get(),
-	idCalled: () =>
-		Template.instance().platform.get() === 'google'
-			? 'client ID'
-			: 'anonymous ID',
-	cliendId() {
-		return getClientId(Template.instance().platform.get())
+	idCalled,
+	clientId: () => Template.instance().clientId.get(),
+	checkingOut: () => Template.instance().checkingOut.get(),
+	heading: () => 'How to do this on your site',
+	items() {
+		return [
+			{
+				heading: 'Install our app',
+				description: '',
+			},
+			{
+				heading: `Grab the ${idCalled()}`,
+				description:
+					'See how we get the ${} before the user clicks buys',
+			},
+			{
+				heading: 'Add that ID as a checkout attribute',
+				description: `Shopify allows you to ${buildLink(
+					'add custom attributes',
+					''
+				)} to the cart, like '${Session.get(
+					'platform'
+				)}-clientID'. See how we do that here.`,
+			},
+			{
+				heading: 'Add that ID as a checkout attribute',
+				description:
+					'Shopify allows you to add custom attributes to the cart. See how we do that here.',
+			},
+		]
 	},
 })
 
@@ -23,31 +61,28 @@ Template.buyNow.events({
 	'click .buy-now': function(event, template) {
 		const variantId = $(event.target).data('variant')
 		template.checkingOut.set(true)
-		getClientId(template.platform.get())
-			.then(clientId => {
-				Meteor.call(
-					'createCheckout',
-					variantId,
-					clientId,
-					platform,
-					(error, result) => {
-						template.checkingOut.set(false)
-						if (error) {
-							return template.message.set(error.message)
-						}
-						template.message.set(
-							`Set ${platform}-clientID as ${clientId} on the checkout attributes,
-							and redirecting to ${result} in 10 seconds`
-						)
-						setTimeout(() => {
-							//wait 10 seconds to show the message
-							document.location.href = result
-						}, 10000)
-					}
+		const platform = Session.get('platform')
+		const clientId = template.clientId.get()
+		Meteor.call(
+			'createCheckout',
+			variantId,
+			clientId,
+			platform,
+			(error, result) => {
+				if (error) {
+					template.checkingOut.set(false)
+					return template.message.set(error.message)
+				}
+				template.message.set(
+					`We set '${platform}-clientID' as ${clientId} on the checkout attributes,
+							and will redirect you to the checkout in 8 seconds`
 				)
-			})
-			.catch(error => {
-				template.message.set(error.message)
-			})
+				setTimeout(() => {
+					//wait 10 seconds to show the message
+					template.checkingOut.set(false)
+					document.location.href = result
+				}, 8000)
+			}
+		)
 	},
 })

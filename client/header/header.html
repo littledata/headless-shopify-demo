@@ -7,6 +7,12 @@
 			{{# if description}}
 				<p data-color="{{color}}">{{description}}</p>
 			{{/ if }}
-		</div>
+		
+			<div class="sub-section sub-panel text-center">
+	    		<div class="actions">
+	    			<button type="button" class="button-outlined price-range {{#unless segment}} selected{{/unless}}" data-platform="google" data-color="contrast" data-size="small">Google Analytics</button><button type="button" class="button-outlined price-range {{#if segment}} selected{{/if}}" data-platform="segment" data-color="contrast" data-size="small">Segment</button>
+	    		</div>
+	    	</div>
+    	</div>
 	</div>
 </template>

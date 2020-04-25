@@ -1,10 +1,14 @@
+Template.header.onCreated(function() {
+	Session.set('platform', 'google')
+})
+
 Template.header.helpers({
 	type() {
 		return this.type || 'simple'
 	},
 
 	color() {
-		return this.background || this.type != 'simple' ? 'inverted' : null // eslint-disable-line eqeqeq
+		return this.background || this.type !== 'simple' ? 'inverted' : null
 	},
 
 	action() {
@@ -22,6 +26,9 @@ Template.header.helpers({
 		return (
 			this.background.includes('.png') || this.background.includes('.jpg')
 		)
+	},
+	segment() {
+		return Session.get('platform') === 'segment'
 	},
 })
 
@@ -41,6 +48,9 @@ Template.header.events({
 			top: $(e.target.hash).offset().top - 80,
 			behavior: 'smooth',
 		})
+	},
+	'click .price-range': function(e) {
+		Session.set('platform', e.target.getAttribute('data-platform'))
 	},
 })
 

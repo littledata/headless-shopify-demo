@@ -1,27 +1,22 @@
 export const getClientId = platform => {
-	return new Promise((resolve, reject) => {
+	return new Promise(resolve => {
 		if (platform === 'google') {
-			if (!window.ga) {
-				reject(
-					new Meteor.Error('No library', 'GA library not installed')
-				)
-			}
-			// this function is called after GA library initializes
+			// unfortunately gtag only makes 'ga' function available after the library loads
+			// so we have to stub it first
+			window.ga =
+				window.ga ||
+				function() {
+					;(window.ga.q = window.ga.q || []).push(arguments) //eslint-disable-line
+				}
+			window.ga.l = +new Date()
 			window.ga(function() {
+				// this function is called after GA library initializes
 				const tracker = window.ga.getAll()[0]
 				const clientId = tracker && tracker.get('clientId')
 				return resolve(clientId)
 			})
 		}
 		if (platform === 'segment') {
-			if (!window.analytics) {
-				reject(
-					new Meteor.Error(
-						'No library',
-						'Segment AnalyticsJS not installed'
-					)
-				)
-			}
 			window.analytics.ready(function() {
 				resolve(window.analytics.user().anonymousId())
 			})
