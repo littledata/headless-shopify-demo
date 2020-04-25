@@ -1,0 +1,177 @@
+@font-face {
+	font-family: "icomoon";
+	src: url("fonts/icomoon.eot?-a67rxj");
+	src: url("fonts/icomoon.eot?#iefix-a67rxj") format("embedded-opentype"),
+		url("fonts/icomoon.woff?-a67rxj") format("woff"),
+		url("fonts/icomoon.ttf?-a67rxj") format("truetype"),
+		url("fonts/icomoon.svg?-a67rxj#icomoon") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.budicon {
+	font-family: "icomoon";
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.budicon.kitchen-hoodfood:before {
+	content: "\e623";
+}
+.budicon.media-imagesphoto:before {
+	content: "\e600";
+}
+.budicon.document-uploadarrow:before {
+	content: "\e612";
+}
+.budicon.ecommerce-billpaymentreceipt:before {
+	content: "\e61e";
+}
+.budicon.ecommerce-pricetag:before {
+	content: "\e613";
+}
+.budicon.ecommerce-moneycashcoinsfinance:before {
+	content: "\e61c";
+}
+.budicon.ecommerce-moneycashfinance:before {
+	content: "\e601";
+}
+.budicon.ecommerce-trolleyshopcartdownload:before {
+	content: "\e611";
+}
+.budicon.ecommerce-trolleyshopcartfill:before {
+	content: "\e602";
+}
+.budicon.interface-refresh:before {
+	content: "\e606";
+}
+.budicon.interface-searchtickdone:before {
+	content: "\e603";
+}
+.budicon.communication-emailenvelopeaddplus:before {
+	content: "\e610";
+}
+.budicon.communication-broadcastmegaphone:before {
+	content: "\e604";
+}
+.budicon.communication-bubblehelpquestionsupport:before {
+	content: "\e605";
+}
+.budicon.web-browsertickdone:before {
+	content: "\e620";
+}
+.budicon.web-sharenetwork:before {
+	content: "\e607";
+}
+.budicon.web-inspectelementbrowser:before {
+	content: "\e614";
+}
+.budicon.web-trafficstatisticgraph:before {
+	content: "\e615";
+}
+.budicon.web-browseinternetnetwork:before {
+	content: "\e60a";
+}
+.budicon.weather-sunbrightness:before {
+	content: "\e61a";
+}
+.budicon.user-single:before {
+	content: "\e616";
+}
+.budicon.user-malegroup:before {
+	content: "\e61d";
+}
+.budicon.user-malelist:before {
+	content: "\e60d";
+}
+.budicon.tool-calculator:before {
+	content: "\e60e";
+}
+.budicon.tool-compass:before {
+	content: "\e61b";
+}
+.budicon.tool-gameconsolegameboy:before {
+	content: "\e61f";
+}
+.budicon.location-signdirectionstreet:before {
+	content: "\e619";
+}
+.budicon.time-stopwatchtimer:before {
+	content: "\e617";
+}
+.budicon.time-calendardate:before {
+	content: "\e608";
+}
+.budicon.location-pinmap:before {
+	content: "\e618";
+}
+.budicon.sport-championpraiserewardgoldwinner:before {
+	content: "\e621";
+}
+.budicon.fitness-heartbloodpressure:before {
+	content: "\e622";
+}
+.budicon.sport-trophyrewardwinnercup:before {
+	content: "\e609";
+}
+
+/** Flaticons Solid **/
+@font-face {
+	font-family: "Flaticons Solid";
+	src: url("/fonts/flaticons-solid.eot");
+	src: url("/fonts/flaticons-solid.eot?#iefix") format("embedded-opentype"),
+		url("/fonts/flaticons-solid.woff") format("woff"),
+		url("/fonts/flaticons-solid.ttf") format("truetype"),
+		url("/fonts/flaticons-solid.svg#flaticons-solid") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.flaticon.solid:before {
+	font-family: "Flaticons Solid";
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon.solid.info-2:before,
+.flaticon.solid.about-2:before,
+.flaticon.solid.J20:before {
+	content: "\e0c7";
+}
+
+.facebook {
+	-webkit-mask-image: url("fonts/icons/_ionicons_svg_logo-facebook.svg");
+	mask-image: url("fonts/icons/_ionicons_svg_logo-facebook.svg");
+}
+
+.twitter {
+	-webkit-mask-image: url("fonts/icons/_ionicons_svg_logo-twitter.svg");
+	mask-image: url("fonts/icons/_ionicons_svg_logo-twitter.svg");
+}
+
+.google-plus {
+	-webkit-mask-image: url("fonts/icons/_ionicons_svg_logo-googleplus.svg");
+	mask-image: url("fonts/icons/_ionicons_svg_logo-googleplus.svg");
+}
+
+.linkedin {
+	-webkit-mask-image: url("fonts/icons/_ionicons_svg_logo-linkedin.svg");
+	mask-image: url("fonts/icons/_ionicons_svg_logo-linkedin.svg");
+}
+
+.instagram {
+	-webkit-mask-image: url("fonts/icons/_ionicons_svg_logo-instagram.svg");
+	mask-image: url("fonts/icons/_ionicons_svg_logo-instagram.svg");
+}

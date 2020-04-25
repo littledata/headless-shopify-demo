@@ -1,0 +1,12 @@
+<template name="header">
+	<div class="header-section {{type}}">
+			<div class="header-no-background" style="background-image: url('/img/home/header-bars.png')"></div>
+		<div class="container">
+			<h1 data-color="{{color}}">{{heading}}</h1>
+			
+			{{# if description}}
+				<p data-color="{{color}}">{{description}}</p>
+			{{/ if }}
+		</div>
+	</div>
+</template>

@@ -5,18 +5,25 @@ import './buyNow.html'
 Template.buyNow.onCreated(function() {
 	this.checkingOut = new ReactiveVar(false)
 	this.message = new ReactiveVar('')
+	this.platform = new ReactiveVar('google')
 })
 
 Template.buyNow.helpers({
 	message: () => Template.instance().message.get(),
+	idCalled: () =>
+		Template.instance().platform.get() === 'google'
+			? 'client ID'
+			: 'anonymous ID',
+	cliendId() {
+		return getClientId(Template.instance().platform.get())
+	},
 })
 
 Template.buyNow.events({
 	'click .buy-now': function(event, template) {
 		const variantId = $(event.target).data('variant')
 		template.checkingOut.set(true)
-		const platform = 'google'
-		getClientId(platform)
+		getClientId(template.platform.get())
 			.then(clientId => {
 				Meteor.call(
 					'createCheckout',

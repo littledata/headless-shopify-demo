@@ -1,6 +1,16 @@
 <template name="buyNow">
-	<div>
-		<button class="btn-large btn-ltd btn-yellow buy-now" data-variant="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMDI5MzgwMTczMDExMA==">Buy Now</button>
-		{{message}}
-	</div>
+	<div class="buy-section">
+			<div id="play" class="player-container">
+				<img src="/img/headless.png">
+			</div>
+			
+			<div class="content">
+				<h1>Test our 'headless' product</h1>
+				<div class="sub-section description">
+					Clicking here will add the {{idCalled}} ({{clientId}}) to the checkout 
+				</div>
+				<button class="button buy-now" data-color="accent" data-variant="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMDI5MzgwMTczMDExMA==">Buy Now</button>
+				{{message}}
+			</div>
+		</div>
 </template>
