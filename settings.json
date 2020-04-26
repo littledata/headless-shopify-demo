@@ -1,0 +1,8 @@
+{ "galaxy.meteor.com":
+	{ "env":
+		{
+			"METEOR_ENV" : "production",
+			"ROOT_URL": "https://headlessdemo.littledata.io",
+		}
+	},
+}
