@@ -33,7 +33,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "node ./node_modules/eslint/bin/eslint.js ./lib ./client ./server --quiet",
     "lint-fix": "node ./node_modules/eslint/bin/eslint.js ./lib ./client ./server --quiet --fix",
-    "prettier": "prettier --write \"**/*.js\""
+    "prettier": "prettier --write \"**/*.js\"",
+    "deploy": "DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy headless-shopify-demo --settings settings.json --owner littledata"
   },
   "author": "eupton",
   "license": "MIT",

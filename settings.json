@@ -2,7 +2,7 @@
 	{ "env":
 		{
 			"METEOR_ENV" : "production",
-			"ROOT_URL": "https://headlessdemo.littledata.io",
+			"ROOT_URL": "https://headlessdemo.littledata.io"
 		}
-	},
+	}
 }
