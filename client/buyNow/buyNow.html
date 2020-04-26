@@ -11,10 +11,10 @@
 					{{#if message}}
 						{{message}}
 					{{else}}
-						This button will add the {{idCalled}} ({{clientId}}) from this page to the Shopify checkout
+						This button has the {{idCalled}} ({{clientId}}) as a data attribute, and clicking will send this with the Shopify checkout.
 					{{/if}}
 				</div>
-				<button class="button buy-now" data-color="accent" data-variant="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMDI5MzgwMTczMDExMA==">
+				<button class="button buy-now" data-color="accent" data-clientid="{{clientId}}" data-variant="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMzQ5ODQyMDcwNzQ1OQ==">
 					{{#if checkingOut}}
 						{{>_barLoader}}
 					{{else}}
@@ -32,7 +32,7 @@
 				<div class="faqs">
 					<h1 class="text-center">{{heading}}</h1>
 					<div class="faqs-items sub-section sub-panel">
-						{{#each item in items}}
+						{{#each item in faqs}}
 							<div class="faqs-item sub-section sub-panel">
 								<h3>{{item.heading}}</h3>
 								<div class="description sub-section">

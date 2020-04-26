@@ -1,6 +1,6 @@
 export const getClientId = platform => {
 	return new Promise(resolve => {
-		if (platform === 'google') {
+		if (platform === 'Google') {
 			// unfortunately gtag only makes 'ga' function available after the library loads
 			// so we have to stub it first
 			window.ga =
@@ -16,7 +16,7 @@ export const getClientId = platform => {
 				return resolve(clientId)
 			})
 		}
-		if (platform === 'segment') {
+		if (platform === 'Segment') {
 			window.analytics.ready(function() {
 				resolve(window.analytics.user().anonymousId())
 			})

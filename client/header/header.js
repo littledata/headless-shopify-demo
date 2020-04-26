@@ -1,5 +1,5 @@
 Template.header.onCreated(function() {
-	Session.set('platform', 'google')
+	Session.set('platform', 'Google')
 })
 
 Template.header.helpers({
@@ -28,7 +28,7 @@ Template.header.helpers({
 		)
 	},
 	segment() {
-		return Session.get('platform') === 'segment'
+		return Session.get('platform') === 'Segment'
 	},
 })
 

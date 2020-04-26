@@ -1,12 +1,7 @@
 import { $ } from 'meteor/jquery'
 import { getClientId } from './getClientId'
+import { faqs, idCalled } from './faqs'
 import './buyNow.html'
-
-const idCalled = () =>
-	Session.get('platform') === 'google' ? 'client ID' : 'anonymous ID'
-
-const buildLink = (text, link) =>
-	`<a href="${link}" target="_blank">${text}</a>`
 
 Template.buyNow.onCreated(function() {
 	this.checkingOut = new ReactiveVar(false)
@@ -27,42 +22,16 @@ Template.buyNow.helpers({
 	idCalled,
 	clientId: () => Template.instance().clientId.get(),
 	checkingOut: () => Template.instance().checkingOut.get(),
-	heading: () => 'How to do this on your site',
-	items() {
-		return [
-			{
-				heading: 'Install our app',
-				description: '',
-			},
-			{
-				heading: `Grab the ${idCalled()}`,
-				description:
-					'See how we get the ${} before the user clicks buys',
-			},
-			{
-				heading: 'Add that ID as a checkout attribute',
-				description: `Shopify allows you to ${buildLink(
-					'add custom attributes',
-					''
-				)} to the cart, like '${Session.get(
-					'platform'
-				)}-clientID'. See how we do that here.`,
-			},
-			{
-				heading: 'Add that ID as a checkout attribute',
-				description:
-					'Shopify allows you to add custom attributes to the cart. See how we do that here.',
-			},
-		]
-	},
+	heading: () => 'Do this on your headless store',
+	faqs,
 })
 
 Template.buyNow.events({
 	'click .buy-now': function(event, template) {
 		const variantId = $(event.target).data('variant')
 		template.checkingOut.set(true)
-		const platform = Session.get('platform')
-		const clientId = template.clientId.get()
+		const platform = Session.get('platform').toLowerCase()
+		const clientId = $(event.target).data('clientid')
 		Meteor.call(
 			'createCheckout',
 			variantId,
