@@ -2,7 +2,7 @@ const buildLink = (text, link) =>
 	`<a href="${link}" target="_blank">${text}</a>`
 
 const appLink = () =>
-	`https://apps.shopofy.com/${
+	`https://apps.shopify.com/${
 		Session.get('platform') === 'Google'
 			? 'littledata'
 			: 'segment-com-by-littledata'
@@ -25,9 +25,9 @@ export const faqs = () => [
 	{
 		heading: `2. Add the ${Session.get('platform')} tracking script`,
 		description: `${buildLink(
-			'Load the tracking script',
+			'Add the tracking script',
 			'https://github.com/littledata/headless-shopify-demo/blob/master/client/head.html'
-		)} and add any event tracking you need before the checkout.`,
+		)} to the page <code>< head ></code> and add any event tracking you need before the checkout. e.g. Track clicks of the Buy button`,
 	},
 	{
 		heading: `3. Grab the ${idCalled()}`,
