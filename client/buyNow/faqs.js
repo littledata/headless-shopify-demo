@@ -22,11 +22,11 @@ export const idCalled = () =>
 const stepFour = () =>
 	Session.get('checkout') === 'ReCharge'
 		? {
-				heading: `4. Send ${idCalled()} to Shopify storefront to store in cart attributes`,
+				heading: `4. [RECHARGE] Send ${idCalled()} to Shopify storefront, to store in cart attributes`,
 				description: `Attributes you pass to the Shopify storefront and then store as cart attributes ${buildLink(
 					'via the Cart API',
 					'https://shopify.dev/docs/themes/ajax-api/reference/cart'
-				)} are then passed to ReCharge, e.g. via the parameters ${buildLink(
+				)} are passed to ReCharge, e.g. via the parameters ${buildLink(
 					'on the cart page',
 					'https://support.rechargepayments.com/hc/en-us/articles/360041127093-Using-cart-attributes-and-UTM-parameters-in-URLs'
 				)}`,
@@ -40,6 +40,15 @@ const stepFour = () =>
 					'here',
 					'https://github.com/littledata/headless-shopify-demo/blob/master/server/checkout/methods.js'
 				)}.`,
+		  }
+
+const stepSix = () =>
+	Session.get('platform') === 'Google'
+		? {}
+		: {
+				heading: '6. [Optional] Repeat for Google Analytics',
+				description:
+					'If Segment sends data to the Google Analytics destination, you will need to <strong>repeat steps 3 & 4</strong> for the Google Analytics client ID (switch to GA above). i.e. Add both <code>google-clientID</code> and <code>segment-clientID</code> as attributes',
 		  }
 
 export const faqs = () => [
@@ -75,4 +84,5 @@ export const faqs = () => [
 			'https://blog.littledata.io/help/posts/shopify-checkout-funnel-updates/'
 		)} and order events via webhooks - you don't need any scripts on the checkout or thank you pages.`,
 	},
+	stepSix(),
 ]
