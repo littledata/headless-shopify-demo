@@ -9,9 +9,9 @@
 				<h1>Buy a headless man</h1>
 				<div class="sub-section description">
 					{{#if message}}
-						{{message}}
+						{{{message}}}
 					{{else}}
-						This button has the {{idCalled}} ({{clientId}}) as a data attribute, and clicking will send this with the Shopify checkout.
+						This button has the {{idCalled}} ({{clientId}}) as a data attribute, and clicking will send this with {{#if recharge}}the URL parameters to be added to the ReCharge cart{{else}}the Shopify checkout{{/if}}.
 					{{/if}}
 				</div>
 				<button class="button buy-now" data-color="accent" data-clientid="{{clientId}}" data-variant="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMzQ5ODQyMDcwNzQ1OQ==">

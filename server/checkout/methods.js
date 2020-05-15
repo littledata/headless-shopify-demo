@@ -3,8 +3,9 @@ import { check } from 'meteor/check'
 
 import fetch from 'node-fetch'
 import Client from 'shopify-buy'
-import { storefrontAccessToken, domain } from './constants'
+import { domain } from '/lib/constants'
 
+export const storefrontAccessToken = '662510a2eec4bf6b0ffb413754a86205'
 const storefrontAPI = Client.buildClient(
 	{
 		domain,
@@ -14,10 +15,10 @@ const storefrontAPI = Client.buildClient(
 )
 
 Meteor.methods({
-	async createCheckout(variantId, clientId, platform) {
+	async createShopifyCheckout({ variantId, clientId, platform }) {
 		check(variantId, String) //Storefront variant ID
 		check(clientId, String)
-		check(platform, String) //google or segment
+		check(platform, String)
 
 		//this is our product to checkout
 		const lineItemsToAdd = [

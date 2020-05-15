@@ -10,7 +10,12 @@
 		
 			<div class="sub-section sub-panel text-center">
 	    		<div class="actions">
-	    			<button type="button" class="button-outlined price-range {{#unless segment}} selected{{/unless}}" data-platform="Google" data-color="contrast" data-size="small">Google Analytics</button><button type="button" class="button-outlined price-range {{#if segment}} selected{{/if}}" data-platform="Segment" data-color="contrast" data-size="small">Segment</button>
+	    			<button type="button" class="button-outlined price-range platform {{#unless segment}} selected{{/unless}}" data-platform="Google" data-color="contrast" data-size="small">Google Analytics</button><button type="button" class="button-outlined price-range platform {{#if segment}} selected{{/if}}" data-platform="Segment" data-color="contrast" data-size="small">Segment</button>
+	    		</div>
+	    	</div>
+	    	<div class="sub-section sub-panel text-center">
+	    		<div class="actions">
+	    			<button type="button" class="button-outlined price-range checkout {{#unless recharge}} selected{{/unless}}" data-platform="Shopify" data-color="contrast" data-size="small">Shopify Checkout</button><button type="button" class="button-outlined price-range checkout {{#if recharge}} selected{{/if}}" data-platform="ReCharge" data-color="contrast" data-size="small">ReCharge Checkout</button>
 	    		</div>
 	    	</div>
     	</div>

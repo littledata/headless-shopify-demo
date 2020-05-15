@@ -1,5 +1,5 @@
-@import "/client/css/colors.less";
-@import "/client/css/buttons.less";
+@import '/client/css/colors.less';
+@import '/client/css/buttons.less';
 
 html {
 	font-size: 16px;
@@ -10,7 +10,7 @@ body {
 
 	background-color: @white;
 
-	font-family: "Europa", "Open Sans", sans-serif;
+	font-family: 'Europa', 'Open Sans', sans-serif;
 	font-size: 1.125rem;
 	font-weight: 300;
 	line-height: 1.8;
@@ -56,11 +56,11 @@ p {
 		}
 	}
 
-	&[data-color="inverted"] {
+	&[data-color='inverted'] {
 		color: @white;
 	}
 
-	&[data-color="accent"] {
+	&[data-color='accent'] {
 		color: @purple;
 	}
 
@@ -92,11 +92,11 @@ h1 {
 		font-size: 2.625rem;
 	}
 
-	&[data-color="inverted"] {
+	&[data-color='inverted'] {
 		color: @white;
 	}
 
-	&[data-color="accent"] {
+	&[data-color='accent'] {
 		color: @purple;
 	}
 }
@@ -118,11 +118,11 @@ h2 {
 		font-size: 1.875rem;
 	}
 
-	&[data-color="inverted"] {
+	&[data-color='inverted'] {
 		color: @white;
 	}
 
-	&[data-color="accent"] {
+	&[data-color='accent'] {
 		color: @purple;
 	}
 }
@@ -136,11 +136,11 @@ h3 {
 
 	margin: 0;
 
-	&[data-color="inverted"] {
+	&[data-color='inverted'] {
 		color: @white;
 	}
 
-	&[data-color="accent"] {
+	&[data-color='accent'] {
 		color: @purple;
 	}
 }
@@ -154,11 +154,11 @@ h4 {
 
 	margin: 0;
 
-	&[data-color="inverted"] {
+	&[data-color='inverted'] {
 		color: @white;
 	}
 
-	&[data-color="accent"] {
+	&[data-color='accent'] {
 		color: @purple;
 	}
 }
@@ -172,11 +172,11 @@ h5 {
 
 	margin: 0;
 
-	&[data-color="inverted"] {
+	&[data-color='inverted'] {
 		color: @white;
 	}
 
-	&[data-color="accent"] {
+	&[data-color='accent'] {
 		color: @purple;
 	}
 }
@@ -297,7 +297,7 @@ ol {
 .is-screenshot {
 	padding-top: 2rem;
 
-	background-image: url("/img/screenshot-header.png");
+	background-image: url('/img/screenshot-header.png');
 	background-size: auto 2rem;
 	background-color: #d8d8d8;
 	background-position: top left;
@@ -356,7 +356,7 @@ ol {
 		height: 1rem;
 		width: 1rem;
 		margin: auto;
-		background-image: url("/img/home/arrow-left.png");
+		background-image: url('/img/home/arrow-left.png');
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -388,7 +388,7 @@ ol {
 	.action-next {
 		&:extend(.slider-items .action all);
 
-		background-image: url("/img/home/arrow-right.png");
+		background-image: url('/img/home/arrow-right.png');
 
 		left: auto;
 		right: 0;
@@ -495,7 +495,7 @@ ol {
 
 		@media (min-width: 768px) {
 			max-width: none;
-			flex-basis: ~"calc(50% - 1rem)";
+			flex-basis: ~'calc(50% - 1rem)';
 			margin: 2rem 0 0;
 		}
 	}
@@ -510,12 +510,12 @@ ol {
 
 		@media (min-width: 768px) {
 			max-width: none;
-			flex-basis: ~"calc(50% - 1rem)";
+			flex-basis: ~'calc(50% - 1rem)';
 			margin: 2rem 0 0;
 		}
 
 		@media (min-width: 1200px) {
-			flex-basis: ~"calc(33% - (4rem/3))";
+			flex-basis: ~'calc(33% - (4rem/3))';
 		}
 	}
 
@@ -529,16 +529,16 @@ ol {
 
 		@media (min-width: 480px) {
 			max-width: none;
-			flex-basis: ~"calc(50% - 1rem)";
+			flex-basis: ~'calc(50% - 1rem)';
 			margin: 2rem 0 0;
 		}
 
 		@media (min-width: 768px) {
-			flex-basis: ~"calc(33% - (4rem/3))";
+			flex-basis: ~'calc(33% - (4rem/3))';
 		}
 
 		@media (min-width: 1200px) {
-			flex-basis: ~"calc(25% - 1.25rem)";
+			flex-basis: ~'calc(25% - 1.25rem)';
 		}
 	}
 }
@@ -593,14 +593,14 @@ p {
 	padding-left: 0;
 
 	/* Base for label styling */
-	[type="checkbox"]:not(:checked),
-	[type="checkbox"]:checked {
+	[type='checkbox']:not(:checked),
+	[type='checkbox']:checked {
 		position: absolute;
 		left: -9999px;
 	}
 
-	[type="checkbox"]:not(:checked) + label,
-	[type="checkbox"]:checked + label {
+	[type='checkbox']:not(:checked) + label,
+	[type='checkbox']:checked + label {
 		position: relative;
 		padding-left: 40px;
 		cursor: pointer;
@@ -610,9 +610,9 @@ p {
 	}
 
 	/* checkbox aspect */
-	[type="checkbox"]:not(:checked) + label:before,
-	[type="checkbox"]:checked + label:before {
-		content: "";
+	[type='checkbox']:not(:checked) + label:before,
+	[type='checkbox']:checked + label:before {
+		content: '';
 		position: absolute;
 		left: 0;
 		top: 2px;
@@ -624,9 +624,9 @@ p {
 	}
 
 	/* checked mark aspect */
-	[type="checkbox"]:not(:checked) + label:after,
-	[type="checkbox"]:checked + label:after {
-		content: "\2714";
+	[type='checkbox']:not(:checked) + label:after,
+	[type='checkbox']:checked + label:after {
+		content: '\2714';
 		position: absolute;
 		top: 5px;
 		left: 7px;
@@ -637,35 +637,35 @@ p {
 	}
 
 	/* checked mark aspect changes */
-	[type="checkbox"]:not(:checked) + label:after {
+	[type='checkbox']:not(:checked) + label:after {
 		opacity: 0;
 		transform: scale(0);
 	}
 
-	[type="checkbox"]:checked + label:after {
+	[type='checkbox']:checked + label:after {
 		opacity: 1;
 		transform: scale(1);
 	}
 
 	/* disabled checkbox */
-	[type="checkbox"]:disabled:not(:checked) + label:before,
-	[type="checkbox"]:disabled:checked + label:before {
+	[type='checkbox']:disabled:not(:checked) + label:before,
+	[type='checkbox']:disabled:checked + label:before {
 		box-shadow: none;
 		border-color: @grey-light;
 		background-color: @grey-lightest;
 	}
 
-	[type="checkbox"]:disabled:checked + label:after {
+	[type='checkbox']:disabled:checked + label:after {
 		color: @grey-lighter;
 	}
 
-	[type="checkbox"]:disabled + label {
+	[type='checkbox']:disabled + label {
 		color: @grey-light;
 	}
 
 	/* accessibility */
-	[type="checkbox"]:checked:focus + label:before,
-	[type="checkbox"]:not(:checked):focus + label:before {
+	[type='checkbox']:checked:focus + label:before,
+	[type='checkbox']:not(:checked):focus + label:before {
 		border-color: @grey-light;
 	}
 }
@@ -719,14 +719,14 @@ p {
 	}
 
 	.onoffswitch-inner:before {
-		content: "ON";
+		content: 'ON';
 		padding-left: 10px;
 		background-color: @green;
 		color: white;
 	}
 
 	.onoffswitch-inner:after {
-		content: "OFF";
+		content: 'OFF';
 		padding-right: 10px;
 		background-color: @red;
 		color: white;
@@ -782,7 +782,7 @@ p {
 .radio-button {
 	position: relative;
 
-	input[type="radio"] {
+	input[type='radio'] {
 		position: absolute;
 		visibility: hidden;
 
@@ -850,7 +850,7 @@ p {
 		&::before {
 			display: block;
 			position: absolute;
-			content: "";
+			content: '';
 			height: 8px;
 			width: 8px;
 			top: 1px;
@@ -899,7 +899,7 @@ p {
 		&::before {
 			display: block;
 			position: absolute;
-			content: "";
+			content: '';
 			height: 8px;
 			width: 8px;
 			top: 1px;
@@ -951,3 +951,7 @@ p {
 /**********************/
 /** Stop Shared CSS **/
 /**********************/
+
+.red {
+	color: @red;
+}

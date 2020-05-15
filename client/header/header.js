@@ -1,7 +1,3 @@
-Template.header.onCreated(function() {
-	Session.set('platform', 'Google')
-})
-
 Template.header.helpers({
 	type() {
 		return this.type || 'simple'
@@ -30,6 +26,9 @@ Template.header.helpers({
 	segment() {
 		return Session.get('platform') === 'Segment'
 	},
+	recharge() {
+		return Session.get('checkout') === 'ReCharge'
+	},
 })
 
 Template.header.events({
@@ -49,8 +48,11 @@ Template.header.events({
 			behavior: 'smooth',
 		})
 	},
-	'click .price-range': function(e) {
+	'click .platform': function(e) {
 		Session.set('platform', e.target.getAttribute('data-platform'))
+	},
+	'click .checkout': function(e) {
+		Session.set('checkout', e.target.getAttribute('data-platform'))
 	},
 })
 

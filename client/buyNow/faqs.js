@@ -8,8 +8,39 @@ const appLink = () =>
 			: 'segment-com-by-littledata'
 	}`
 
+export const attributeName = () => {
+	const platform = Session.get('platform')
+	if (platform) {
+		return `${platform.toLowerCase()}-clientID`
+	}
+	return ''
+}
+
 export const idCalled = () =>
 	Session.get('platform') === 'Google' ? 'client ID' : 'anonymous ID'
+
+const stepFour = () =>
+	Session.get('checkout') === 'ReCharge'
+		? {
+				heading: `4. Send ${idCalled()} to Shopify storefront to store in cart attributes`,
+				description: `Attributes you pass to the Shopify storefront and then store as cart attributes ${buildLink(
+					'via the Cart API',
+					'https://shopify.dev/docs/themes/ajax-api/reference/cart'
+				)} are then passed to ReCharge, e.g. via the parameters ${buildLink(
+					'on the cart page',
+					'https://support.rechargepayments.com/hc/en-us/articles/360041127093-Using-cart-attributes-and-UTM-parameters-in-URLs'
+				)}`,
+		  }
+		: {
+				heading: `4. Send that ${idCalled()} as a checkout attribute`,
+				description: `Shopify allows you to ${buildLink(
+					'add custom attributes',
+					'https://shopify.github.io/js-buy-sdk/#updating-checkout-attributes'
+				)} to the cart, like <code>${attributeName()}</code>. See how we do that ${buildLink(
+					'here',
+					'https://github.com/littledata/headless-shopify-demo/blob/master/server/checkout/methods.js'
+				)}.`,
+		  }
 
 export const faqs = () => [
 	{
@@ -36,20 +67,9 @@ export const faqs = () => [
 			'https://github.com/littledata/headless-shopify-demo/blob/master/client/buyNow/getClientId.js'
 		)} get the ${idCalled()} before the user clicks buy, or inspect the demo button above.`,
 	},
+	stepFour(),
 	{
-		heading: `4. Send that ${idCalled()} as a checkout attribute`,
-		description: `Shopify allows you to ${buildLink(
-			'add custom attributes',
-			'https://shopify.github.io/js-buy-sdk/#updating-checkout-attributes'
-		)} to the cart, like <code>${Session.get(
-			'platform'
-		).toLowerCase()}-clientID</code>. See how we do that ${buildLink(
-			'here',
-			'https://github.com/littledata/headless-shopify-demo/blob/master/server/checkout/methods.js'
-		)}.`,
-	},
-	{
-		heading: '5. Checkout events are linked to users',
+		heading: '5. Checkout steps and orders are linked to users',
 		description: `Our servers pick up the ${buildLink(
 			'checkout',
 			'https://blog.littledata.io/help/posts/shopify-checkout-funnel-updates/'
