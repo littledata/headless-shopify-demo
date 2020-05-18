@@ -47,8 +47,10 @@ const stepSix = () =>
 		? {}
 		: {
 				heading: '6. [Optional] Repeat for Google Analytics',
-				description:
-					'If Segment sends data to the Google Analytics destination, you will need to <strong>repeat steps 3 & 4</strong> for the Google Analytics client ID (switch to GA above). i.e. Add both <code>google-clientID</code> and <code>segment-clientID</code> as attributes',
+				description: `If Segment sends data to Google Analytics (GA), you will need to enable the ${buildLink(
+					'GA destination',
+					'https://blog.littledata.io/help/posts/send-data-from-segment-to-google-analytics/'
+				)} in "device mode" in Segment and <strong>repeat steps 3 & 4</strong> to get the GA client ID (switch to GA above). i.e. Add both <code>google-clientID</code> and <code>segment-clientID</code> as attributes`,
 		  }
 
 export const faqs = () => [
@@ -70,11 +72,13 @@ export const faqs = () => [
 		)} to the page <code>< head ></code> and add any event tracking you need before the checkout. e.g. Track clicks of the Buy button`,
 	},
 	{
-		heading: `3. Grab the ${idCalled()}`,
+		heading: `3. Get the ${idCalled()} from the browser`,
 		description: `${buildLink(
 			'See how we',
 			'https://github.com/littledata/headless-shopify-demo/blob/master/client/buyNow/getClientId.js'
-		)} get the ${idCalled()} before the user clicks buy, or inspect the demo button above.`,
+		)} get the ${idCalled()} for ${Session.get(
+			'platform'
+		)} before the user clicks buy, or inspect the demo button above.`,
 	},
 	stepFour(),
 	{
