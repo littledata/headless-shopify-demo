@@ -1,18 +1,31 @@
 import { $ } from 'meteor/jquery'
-import { getClientId } from './getClientId'
-import { faqs, idCalled, attributeName } from './faqs'
+import { getGoogleClientId } from './getGoogleClientId'
+import { getSegmentAnonymousId } from './getSegmentAnonymousId'
+import { idCalled, attributeName } from './helpers'
+import { faqs } from './faqs'
 import { domain } from '/lib/constants'
 import './buyNow.html'
 
 Template.buyNow.onCreated(function() {
 	this.checkingOut = new ReactiveVar(false)
 	this.message = new ReactiveVar('')
-	this.clientId = new ReactiveVar('')
+
 	const instance = this
 	instance.autorun(() => {
-		Session.get('checkout')
-		getClientId(Session.get('platform'))
-			.then(clientId => instance.clientId.set(clientId))
+		Session.get('tryAgain')
+		const callFunction =
+			Session.get('platform') === 'Google'
+				? getGoogleClientId
+				: getSegmentAnonymousId
+		callFunction()
+			.then(clientId => {
+				if (clientId) {
+					Session.set('clientId', clientId)
+				} else {
+					//trigger autorun again
+					Session.set('tryAgain', true)
+				}
+			})
 			.catch(err => {
 				instance.message.set(err.message)
 			})
@@ -22,7 +35,7 @@ Template.buyNow.onCreated(function() {
 Template.buyNow.helpers({
 	message: () => Template.instance().message.get(),
 	idCalled,
-	clientId: () => Template.instance().clientId.get(),
+	clientId: () => Session.get('clientId'),
 	checkingOut: () => Template.instance().checkingOut.get(),
 	heading: () => 'Do this on your headless store',
 	faqs,
@@ -38,7 +51,7 @@ Template.buyNow.events({
 
 		if (Session.get('checkout') === 'ReCharge') {
 			//ReCharge checkout needs to come from Shopify storefront
-			const cartURL = `https://${domain}/cart?attribute[${attributeName()}]=${template.clientId.get()}`
+			const cartURL = `https://${domain}/cart?attribute[${attributeName()}]=${clientId}`
 			document.location.href = cartURL
 		}
 
