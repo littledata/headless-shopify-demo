@@ -5,10 +5,10 @@ export const buildLink = (text, link) =>
 
 export const startingReCharge = () =>
 	Session.get('checkout') === 'ReCharge'
-		? `You then need to ${buildLink(
+		? ` You then need to ${buildLink(
 				'add the ReCharge connection',
 				'https://blog.littledata.io/help/posts/recharge-integration-setup-guide/'
-		  )} in Littledata`
+		  )} in Littledata.`
 		: ''
 
 export const appLink = () =>
@@ -59,3 +59,11 @@ export const attributesArray = () =>
 	Session.get('checkout') === 'ReCharge'
 		? 'note_attributes'
 		: 'customAttributes'
+
+export const segmentWriteKey = () =>
+	Session.get('platform') === 'Segment'
+		? ` You can either share the same Segment source as your front end or create a ${buildLink(
+				'new source',
+				'https://blog.littledata.io/help/posts/segment-installation-guide/'
+		  )}.`
+		: 'for Littledata'

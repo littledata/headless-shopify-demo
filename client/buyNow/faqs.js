@@ -8,6 +8,7 @@ import {
 	linkToFunction,
 	startingReCharge,
 	attributesArray,
+	segmentWriteKey,
 } from './helpers'
 
 const stepFourReCharge = () =>
@@ -38,7 +39,7 @@ export const faqs = () => [
 		)} to your store, and choose the ${buildLink(
 			'manual install route',
 			'https://blog.littledata.io/help/posts/littledata-shopify-install-guide/'
-		)} to skip adding the storefront tracking script. ${startingReCharge()}`,
+		)} to skip adding the storefront tracking script.${segmentWriteKey()}${startingReCharge()}`,
 	},
 	{
 		heading: `2. Add the ${Session.get('platform')} tracking script`,
