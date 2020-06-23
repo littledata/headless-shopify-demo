@@ -1,3 +1,4 @@
+//eslint-disable-next-line
 import { getGoogleClientId } from './getGoogleClientId'
 
 export const buildLink = (text, link) =>
@@ -5,8 +6,8 @@ export const buildLink = (text, link) =>
 
 export const startingReCharge = () =>
 	Session.get('checkout') === 'ReCharge'
-		? ` You then need to ${buildLink(
-				'add the ReCharge connection',
+		? ` You then need to add the ${buildLink(
+				'ReCharge connection',
 				'https://blog.littledata.io/help/posts/recharge-integration-setup-guide/'
 		  )} in Littledata.`
 		: ''
@@ -17,6 +18,9 @@ export const appLink = () =>
 			? 'littledata'
 			: 'segment-com-by-littledata'
 	}`
+
+export const appName = () =>
+	Session.get('platform') === 'Google' ? 'Google Analytics' : 'Segment'
 
 export const attributeName = () => {
 	const platform = Session.get('platform')
@@ -66,4 +70,4 @@ export const segmentWriteKey = () =>
 				'new source',
 				'https://blog.littledata.io/help/posts/segment-installation-guide/'
 		  )}.`
-		: 'for Littledata'
+		: ''
