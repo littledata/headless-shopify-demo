@@ -11,65 +11,14 @@
 					</div>
 					<div class="nav-right">
 						{{#each nav}}
-							{{#if hasDropdown}}
-								<div class="dropdown">
-									<a class=" dropdown-toggle {{class}}" data-size="small" data-color="contrast" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-										{{name}}
-										<span class="caret"></span>
-									</a>
-									<div class="submenu">
-										{{# each orderedSubmenu }}
-											<div>
-												<a class="button-ghost" data-size="small" href="{{getLink}}">{{name}}</a>
-											</div>
-											<hr/>
-										{{/ each }}
-									</div>
-								</div>
-							{{else}}
-								<div>
-									<a class=" {{isActive}} {{class}} hidden-xs hidden-sm" data-size="small" data-color="contrast" href="{{getLink}}">
-										{{name}}
-									</a>
-								</div>
-							{{/if}}
-						{{/each}}
-					</div>
-					<a class=" trigger" data-size="small" data-color="contrast" href="#" id="trigger"><span>Open/Close Menu</span></a>
-				</div>
-			</div>
-		</div>
-</template>
-
-<template name="mobileNav">
-	<div id="mobile-nav">
-		<div class="nav-left">
-			<div>
-				<a href="/" class="home">
-					{{> littledataLogo color="#fff"}}
-				</a>
-			</div>
-		</div>
-		<hr />
-		<div class="nav-right">
-			{{#each mobileNav}}
-			<div class="{{# if hasDropdown }}dropdown{{/if}}">
-				<a class="{{class}}" data-size="small" data-color="contrast" href="{{getLink}}">
-					{{name}}
-				</a>
-				{{# if hasDropdown }}
-					<div class="submenu">
-						{{# each getMobileSubMenu }}
 							<div>
-								<a class="{{class}}" data-size="small" data-color="contrast" href="{{getLink}}">
+								<a class="{{isActive}} {{class}}" data-size="small" data-color="contrast" href="{{getLink}}">
 									{{name}}
 								</a>
 							</div>
-						{{/ each }}
+						{{/each}}
 					</div>
-				{{/ if }}
+				</div>
 			</div>
-			{{/each}}
 		</div>
-	</div>
 </template>

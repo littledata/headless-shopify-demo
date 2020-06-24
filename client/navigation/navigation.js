@@ -2,8 +2,9 @@ import { $ } from 'meteor/jquery'
 
 const navLinks = new ReactiveVar([
 	{
-		name: 'Go to Help Centre',
-		link: 'https://blog.littledata.io/help',
+		name: 'Go to Help Center',
+		link:
+			'https://blog.littledata.io/help/posts/working-with-a-headless-shopify-setup/',
 		dropdown: false,
 		isDisplayedOnMobile: true,
 	},
@@ -11,14 +12,6 @@ const navLinks = new ReactiveVar([
 const mobileNavLinks = new ReactiveVar([])
 
 Template.navigation.onRendered(function() {
-	$(window).on('resize', function() {
-		if ($(window).innerWidth() > 991) {
-			$('#trigger').removeClass('open')
-			$('body')
-				.removeClass('menu-visible')
-				.removeClass('scrolled')
-		}
-	})
 	$(window).on('scroll', function() {
 		if ($(window).innerWidth() < 992) {
 			if (window.scrollY !== 0) {
@@ -55,27 +48,9 @@ const sharedHelpers = {
 			? AppRootURL + this.link
 			: this.link
 	},
-	orderedSubmenu() {
-		const { submenu } = this
-
-		if (!submenu) return []
-		return submenu.sort((a, b) => {
-			return a.displayOrder - b.displayOrder
-		})
-	},
-	getMobileSubMenu() {
-		const { submenu } = this
-		if (!submenu) return []
-		return submenu
-			.filter(item => item.isDisplayedOnMobile)
-			.sort((a, b) => {
-				return a.displayOrder - b.displayOrder
-			})
-	},
 }
 
 Template.navigation.helpers(sharedHelpers)
-Template.mobileNav.helpers(sharedHelpers)
 
 Template.navigation.events({
 	'click #trigger': function(e) {
@@ -86,13 +61,6 @@ Template.navigation.events({
 	},
 	'click #trigger.open': function(e) {
 		e.preventDefault()
-		$('#trigger').removeClass('open')
-		$('body').removeClass('menu-visible')
-	},
-})
-
-Template.mobileNav.events({
-	'click #mobile-nav a': function() {
 		$('#trigger').removeClass('open')
 		$('body').removeClass('menu-visible')
 	},
