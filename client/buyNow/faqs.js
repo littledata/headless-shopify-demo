@@ -34,10 +34,10 @@ const asterix = () =>
 export const faqs = () => [
 	{
 		heading: "1. Install Littledata's app",
-		description: `Add ${buildLink(
-			"Littledata's Shopify app",
+		description: `Add Littledata's ${buildLink(
+			`Shopify app for ${appName()}`,
 			appLink()
-		)} for ${appName()} to your store, and choose the ${buildLink(
+		)} to your store, and choose the ${buildLink(
 			'manual install route',
 			'https://blog.littledata.io/help/posts/littledata-shopify-install-guide/'
 		)} to skip adding our storefront tracking script.${segmentWriteKey()}${startingReCharge()}`,
