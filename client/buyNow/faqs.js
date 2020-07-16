@@ -40,7 +40,7 @@ export const faqs = () => [
 		)} to your store, and choose the ${buildLink(
 			'manual install route',
 			'https://blog.littledata.io/help/posts/littledata-shopify-install-guide/'
-		)} to skip adding our storefront tracking script.${segmentWriteKey()}${startingReCharge()}`,
+		)} and check the box for headless setup. That skips adding our storefront tracking script.${segmentWriteKey()}${startingReCharge()}`,
 	},
 	{
 		heading: `2. Add the ${appName()} tag`,

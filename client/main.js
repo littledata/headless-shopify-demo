@@ -1,4 +1,7 @@
 import './body.html'
 
-Session.set('platform', 'Google')
+const platform = document.location.href.includes('segment')
+	? 'Segment'
+	: 'Google'
+Session.set('platform', platform)
 Session.set('checkout', 'Shopify')

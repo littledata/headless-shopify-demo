@@ -34,7 +34,9 @@ export const attributesObject = () => {
 	const always = `{ ${attributeName()} : '${Session.get('clientId')}' }`
 	let sometimes = ''
 	if (Session.get('platform') === 'Segment') {
-		sometimes = `, { google-clientID: '${ga.getAll()[0].get('clientId')}'}`
+		const tracker = ga && typeof ga.getAll === 'function' && ga.getAll()[0]
+		const gaClientId = tracker && tracker.get('clientId')
+		sometimes = `, { google-clientID: '${gaClientId}'}`
 	}
 	return `[ ${always}${sometimes} ]`
 }
