@@ -17,11 +17,17 @@ const stepFourReCharge = () =>
 		? `See ReCharge docs for how to use the ${buildLink(
 				'checkout API',
 				'https://developer.rechargepayments.com/#create-a-checkout-beta'
-		  )} or ${buildLink(
-				'pass parameters',
+		  )} to set the <code>${attributesArray()}</code> as <code>${attributesObject()}</code>, or you can pass ${buildLink(
+				'parameters to the cart page',
 				'https://support.rechargepayments.com/hc/en-us/articles/360041127093-Using-cart-attributes-and-UTM-parameters-in-URLs'
-		  )} to the cart page. `
-		: ''
+		  )} `
+		: `In ${buildLink(
+				'this NodeJS example',
+				'https://github.com/littledata/headless-shopify-demo/blob/master/server/checkout/methods.js'
+		  )} see how we set the checkout ${attributesArray()} as <code>${attributesObject()}</code>, or set these <code>attributes</code> via the ${buildLink(
+				'Cart API',
+				'https://shopify.dev/docs/themes/ajax-api/reference/cart'
+		  )}.`
 
 const asterix = () =>
 	Session.get('platform') === 'Segment'
@@ -71,13 +77,7 @@ export const faqs = () => [
 		heading: `5. Send that ${idCalled()} in checkout ${attributesArray()}`,
 		description: `${Session.get(
 			'checkout'
-		)} allows you to add a <code>${attributesArray()}</code> array to the checkout (or <code>attributes</code> via the ${buildLink(
-			'Cart API',
-			'https://shopify.dev/docs/themes/ajax-api/reference/cart'
-		)}). ${stepFourReCharge()}In ${buildLink(
-			'this NodeJS example',
-			'https://github.com/littledata/headless-shopify-demo/blob/master/server/checkout/methods.js'
-		)} see how we set the ${attributesArray()}<super>*</super> as <br/><code>${attributesObject()}</code>`,
+		)} allows you to add a <code>${attributesArray()}</code> array to the checkout. ${stepFourReCharge()}`,
 	},
 	{
 		heading: '6. Checkout steps and orders are linked to users',
