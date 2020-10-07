@@ -16,7 +16,7 @@ const stepFourReCharge = () =>
 	Session.get('checkout') === 'ReCharge'
 		? `See ReCharge docs for how to use the ${buildLink(
 				'checkout API',
-				'https://developer.rechargepayments.com/#create-a-checkout-beta'
+				'https://developer.rechargepayments.com/#create-a-checkout'
 		  )} to set the <code>${attributesArray()}</code> as <code>${attributesObject()}</code>, or you can pass ${buildLink(
 				'parameters to the cart page',
 				'https://support.rechargepayments.com/hc/en-us/articles/360041127093-Using-cart-attributes-and-UTM-parameters-in-URLs'
