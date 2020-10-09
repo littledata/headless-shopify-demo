@@ -37,6 +37,12 @@ const asterix = () =>
 		  )} in "device mode" in Segment, otherwise you can leave out the <code>google-clientID</code> from ${attributesArray()}`
 		: ''
 
+const nacelle = () =>
+	` Using Nacelle? There is an ${buildLink(
+		'NPM package',
+		'https://www.npmjs.com/package/@nacelle/nacelle-littledata-nuxt-module'
+	)} to do this.`
+
 export const faqs = () => [
 	{
 		heading: "1. Install Littledata's app",
@@ -71,7 +77,7 @@ export const faqs = () => [
 			linkToFunction()
 		)} for ${Session.get(
 			'platform'
-		)} before the user clicks 'Add to cart', or try the 'Buy Now' button above to see it in action.`,
+		)} before the user clicks 'Add to cart', or try the 'Buy Now' button above to see it in action. ${nacelle()}`,
 	},
 	{
 		heading: `5. Send that ${idCalled()} in checkout ${attributesArray()}`,

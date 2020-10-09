@@ -7,3 +7,7 @@ Littledata's app tracks your checkout and orders server-side. To link these even
 ### Segment vs GA
 
 Including `?segment=true` in the URL switches to the guide for our [Segment app](https://apps.shopify.com/segment-com-by-littledata), or you can use the button in the header to switch platform
+
+### Using Nacelle?
+
+Nacelle has developed an [NPM package](https://www.npmjs.com/package/@nacelle/nacelle-littledata-nuxt-module) to automate steps 4 and 5.
