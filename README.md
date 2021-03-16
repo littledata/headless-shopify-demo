@@ -11,3 +11,7 @@ Including `?segment=true` in the URL switches to the guide for our [Segment app]
 ### Using Nacelle?
 
 Nacelle has developed an [NPM package](https://www.npmjs.com/package/@nacelle/nacelle-littledata-nuxt-module) to automate steps 4 and 5.
+
+### Simulating an order with missing cart attributes
+
+Adding `sendClientId=false` to the URL parameters will cause the private app NOT to add cart attributes, and as a result the order will come through with no `note_attributes` field.
