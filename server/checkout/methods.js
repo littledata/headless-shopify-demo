@@ -17,7 +17,7 @@ const storefrontAPI = Client.buildClient(
 Meteor.methods({
 	async createShopifyCheckout({ variantId, clientId, platform }) {
 		check(variantId, String) //Storefront variant ID
-		check(clientId, String)
+		check(clientId, Match.Maybe(String))
 		check(platform, String)
 
 		//this is our product to checkout
@@ -27,12 +27,12 @@ Meteor.methods({
 				quantity: 1,
 			},
 		]
-
+		const updateAttributes = {}
 		//this is the field Littledata's webhook will pick up
-		const updateAttributes = {
-			customAttributes: [
+		if (clientId) {
+			updateAttributes.customAttributes = [
 				{ key: `${platform}-clientID`, value: clientId },
-			],
+			]
 		}
 
 		//first create checkout with the chosen line items

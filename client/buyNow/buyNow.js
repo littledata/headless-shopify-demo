@@ -40,6 +40,7 @@ Template.buyNow.helpers({
 	heading: () => 'Do this on your headless store',
 	faqs,
 	recharge: () => Session.get('checkout') === 'ReCharge',
+	sendClientId: () => Session.get('sendClientId'),
 })
 
 Template.buyNow.events({
@@ -47,7 +48,10 @@ Template.buyNow.events({
 		const variantId = $(event.target).data('variant')
 		template.checkingOut.set(true)
 		const platform = Session.get('platform').toLowerCase()
-		const clientId = $(event.target).data('clientid')
+		let clientId
+		if (Session.get('sendClientId') !== false) {
+			clientId = $(event.target).data('clientid')
+		}
 
 		if (Session.get('checkout') === 'ReCharge') {
 			//ReCharge checkout needs to come from Shopify storefront
@@ -63,9 +67,11 @@ Template.buyNow.events({
 					template.checkingOut.set(false)
 					return template.message.set(error.message)
 				}
+				const addedClientId = clientId
+					? `We set '${platform}-clientID' as ${clientId} on the checkout attributes. `
+					: 'sendClientId set to FALSE. '
 				template.message.set(
-					`<span class="red">We set '${platform}-clientID' as ${clientId} on the checkout attributes,
-							and will redirect you to the checkout in 8 seconds</span>`
+					`<span class="red">${addedClientId}Redirecting you to the checkout in 8 seconds</span>`
 				)
 				setTimeout(() => {
 					//wait 10 seconds to show the message
