@@ -31,12 +31,14 @@ export const attributeName = () => {
 }
 
 export const attributesObject = () => {
-	const always = `{ ${attributeName()} : '${Session.get('clientId')}' }`
+	const always = `{ key: "${attributeName()}", value: "${Session.get(
+		'clientId'
+	)}" }`
 	let sometimes = ''
 	if (Session.get('platform') === 'Segment') {
 		const tracker = ga && typeof ga.getAll === 'function' && ga.getAll()[0]
 		const gaClientId = tracker && tracker.get('clientId')
-		sometimes = `, { google-clientID: '${gaClientId}'}`
+		sometimes = `, { key: "google-clientID", value: "${gaClientId}"}`
 	}
 	return `[ ${always}${sometimes} ]`
 }
