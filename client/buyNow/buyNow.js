@@ -59,6 +59,12 @@ Template.buyNow.events({
 			document.location.href = cartURL
 		}
 
+		/**
+		 * @param {string} variantId Shopify variant ID
+		 * @param {string} clientId browser identifier, picked up from cookie
+		 * @param {string} platform the analytics platform generating the clientId - 'google' or 'segment'
+		 * @returns {string} returns the checkout URL
+		 */
 		Meteor.call(
 			'createShopifyCheckout',
 			{ variantId, clientId, platform },

@@ -1,9 +1,15 @@
 import { storefrontAPI } from './storefrontAPI'
 
+/**
+ * @param {string} variantId Shopify variant ID
+ * @param {string} clientId browser identifier, picked up from cookie
+ * @param {string} platform the analytics platform generating the clientId - 'google' or 'segment'
+ * @returns {string} returns the checkout URL
+ */
 export const createShopifyCheckout = async ({
 	variantId,
 	clientId,
-	platform,
+	platform, // 'google' or 'segment'
 }) => {
 	//first create checkout with the chosen line items
 	const checkout = await storefrontAPI.checkout.create()
