@@ -27,7 +27,7 @@ const stepFourReCharge = () =>
 	Session.get('checkout') === 'ReCharge'
 		? `See ReCharge docs for how to use the ${buildLink(
 				'checkout API',
-				'https://developer.rechargepayments.com/#create-a-checkout'
+				'https://developer.rechargepayments.com/2021-11/checkouts/checkout_object'
 		  )} to set the <code>${attributesArray()}</code> as <code>${attributesObject()}</code>. <super>*</super>`
 		: `In ${buildLink(
 				'this NodeJS example',

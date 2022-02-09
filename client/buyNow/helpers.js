@@ -30,15 +30,17 @@ export const attributeName = () => {
 	return ''
 }
 
+const keyName = () => (Session.get('checkout') === 'ReCharge' ? 'name' : 'key')
+
 export const attributesObject = () => {
-	const always = `{ key: "${attributeName()}", value: "${Session.get(
+	const always = `{ ${keyName()}: "${attributeName()}", value: "${Session.get(
 		'clientId'
 	)}" }`
 	let sometimes = ''
 	if (Session.get('platform') === 'Segment') {
 		const tracker = ga && typeof ga.getAll === 'function' && ga.getAll()[0]
 		const gaClientId = tracker && tracker.get('clientId')
-		sometimes = `, { key: "google-clientID", value: "${gaClientId}"}`
+		sometimes = `, { ${keyName()}: "google-clientID", value: "${gaClientId}"}`
 	}
 	return `[ ${always}${sometimes} ]`
 }
@@ -65,7 +67,7 @@ export const linkToFunction = () => {
 
 export const attributesArray = () =>
 	Session.get('checkout') === 'ReCharge'
-		? 'note_attributes'
+		? 'order_attributes'
 		: 'customAttributes'
 
 export const segmentWriteKey = () =>
