@@ -4,11 +4,11 @@ import { getGoogleClientId } from './getGoogleClientId'
 export const buildLink = (text, link) =>
 	`<a href="${link}" target="_blank">${text}</a>`
 
-export const startingReCharge = () =>
-	Session.get('checkout') === 'ReCharge'
+export const startingRecharge = () =>
+	Session.get('checkout') === 'Recharge'
 		? ` You then need to add the ${buildLink(
-				'ReCharge connection',
-				'https://blog.littledata.io/help/posts/recharge-integration-setup-guide/'
+				'Recharge connection',
+				'https://help.littledata.io/posts/recharge-integration-setup-guide/'
 		  )} in Littledata.`
 		: ''
 
@@ -30,7 +30,7 @@ export const attributeName = () => {
 	return ''
 }
 
-const keyName = () => (Session.get('checkout') === 'ReCharge' ? 'name' : 'key')
+const keyName = () => (Session.get('checkout') === 'Recharge' ? 'name' : 'key')
 
 export const attributesObject = () => {
 	const always = `{ ${keyName()}: "${attributeName()}", value: "${Session.get(
@@ -66,7 +66,7 @@ export const linkToFunction = () => {
 }
 
 export const attributesArray = () =>
-	Session.get('checkout') === 'ReCharge'
+	Session.get('checkout') === 'Recharge'
 		? 'order_attributes'
 		: 'customAttributes'
 
@@ -74,6 +74,6 @@ export const segmentWriteKey = () =>
 	Session.get('platform') === 'Segment'
 		? ` You can either share the same Segment source as your front end or create a ${buildLink(
 				'new source',
-				'https://blog.littledata.io/help/posts/segment-installation-guide/'
+				'https://help.littledata.io/posts/segment-installation-guide/'
 		  )}.`
 		: ''

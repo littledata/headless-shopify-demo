@@ -7,13 +7,13 @@ import {
 	ecommerceDocLink,
 	trackingScriptCode,
 	linkToFunction,
-	startingReCharge,
+	startingRecharge,
 	attributesArray,
 	segmentWriteKey,
 } from './helpers'
 
 const asterix = () =>
-	Session.get('checkout') === 'ReCharge'
+	Session.get('checkout') === 'Recharge'
 		? `<super>*</super> Alternatively you could pass ${buildLink(
 				'parameters to the cart page',
 				'https://support.rechargepayments.com/hc/en-us/articles/360041127093-Using-cart-attributes-and-UTM-parameters-in-URLs'
@@ -23,9 +23,9 @@ const asterix = () =>
 				'https://shopify.dev/docs/themes/ajax-api/reference/cart'
 		  )}, which then gets passed into the checkout`
 
-const stepFourReCharge = () =>
-	Session.get('checkout') === 'ReCharge'
-		? `See ReCharge docs for how to use the ${buildLink(
+const stepFourRecharge = () =>
+	Session.get('checkout') === 'Recharge'
+		? `See Recharge docs for how to use the ${buildLink(
 				'checkout API',
 				'https://developer.rechargepayments.com/2021-11/checkouts/checkout_object'
 		  )} to set the <code>${attributesArray()}</code> as <code>${attributesObject()}</code>. <super>*</super>`
@@ -38,7 +38,7 @@ const segmentToGA = () =>
 	Session.get('platform') === 'Segment'
 		? ` If Segment sends data to Google Analytics (GA), you will need also to enable the ${buildLink(
 				'GA destination',
-				'https://blog.littledata.io/help/posts/send-data-from-segment-to-google-analytics/'
+				'https://help.littledata.io/posts/send-data-from-segment-to-google-analytics/'
 		  )} in "device mode" in Segment.`
 		: ''
 
@@ -62,8 +62,8 @@ export const faqs = () => [
 			appLink()
 		)} to your store, and choose the ${buildLink(
 			'manual install route',
-			'https://blog.littledata.io/help/posts/littledata-shopify-install-guide/'
-		)} and check the box for headless setup. That skips adding our storefront tracking script.${segmentWriteKey()}${startingReCharge()}`,
+			'https:///posts/littledata-shopify-install-guide/'
+		)} and check the box for headless setup. That skips adding our storefront tracking script.${segmentWriteKey()}${startingRecharge()}`,
 	},
 	{
 		heading: `2. Add the ${appName()} tag`,
@@ -85,13 +85,13 @@ export const faqs = () => [
 		heading: `4. Send that ${idCalled()} in checkout ${attributesArray()}`,
 		description: `${Session.get(
 			'checkout'
-		)} allows you to add a <code>${attributesArray()}</code> array to the checkout. ${stepFourReCharge()}`,
+		)} allows you to add a <code>${attributesArray()}</code> array to the checkout. ${stepFourRecharge()}`,
 	},
 	{
 		heading: '5. Checkout steps and orders are linked to users',
 		description: `Your headless setup is complete! Our servers pick up the ${buildLink(
 			'checkout',
-			'https://blog.littledata.io/help/posts/shopify-checkout-funnel-updates/'
+			'https://help.littledata.io/posts/shopify-checkout-funnel-updates/'
 		)} and order events via webhooks - you don't need any scripts on the checkout or thank you pages.  ${preCheckoutTracking()}`,
 	},
 	{ heading: '', description: '' },

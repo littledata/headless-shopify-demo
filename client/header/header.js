@@ -27,7 +27,7 @@ Template.header.helpers({
 		return Session.get('platform') === 'Segment'
 	},
 	recharge() {
-		return Session.get('checkout') === 'ReCharge'
+		return Session.get('checkout') === 'Recharge'
 	},
 })
 

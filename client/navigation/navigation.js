@@ -4,7 +4,7 @@ const navLinks = new ReactiveVar([
 	{
 		name: 'Go to Help Center',
 		link:
-			'https://blog.littledata.io/help/posts/working-with-a-headless-shopify-setup/',
+			'https://help.littledata.io/posts/working-with-a-headless-shopify-setup/',
 		dropdown: false,
 		isDisplayedOnMobile: true,
 	},
