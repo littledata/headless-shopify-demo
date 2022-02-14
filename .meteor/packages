@@ -6,8 +6,8 @@
 
 blaze-html-templates         
 standard-minifier-css@1.7.4   # CSS minifier run for production mode
-standard-minifier-js@2.7.1    # JS minifier run for production mode
-ecmascript@0.16.0             # Enable ECMAScript2015+ syntax in app code
+standard-minifier-js@2.8.0    # JS minifier run for production mode
+ecmascript@0.16.1             # Enable ECMAScript2015+ syntax in app code
 shell-server@0.5.0            # Server-side component of the `meteor shell` command
 webapp@1.13.0                  # Serves a Meteor app over HTTP
 server-render@0.4.0           # Support for server-side rendering

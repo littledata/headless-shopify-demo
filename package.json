@@ -7,9 +7,9 @@
 		"node": "v16.9.1"
 	},
 	"dependencies": {
-		"@babel/runtime": "^7.9.2",
-		"node-fetch": "^2.6.0",
-		"shopify-buy": "^2.10.0",
+		"@babel/runtime": "^7.17.2",
+		"node-fetch": "^2.6.7",
+		"shopify-buy": "^2.14.0",
 		"webfontloader": "^1.6.28"
 	},
 	"devDependencies": {
