@@ -1,11 +1,17 @@
-//eslint-disable-next-line
-import { getGoogleClientId } from './getGoogleClientId'
+import { checkoutDict } from '../../lib/constants'
+
+export const isRechargeCheckout = () => {
+	return (
+		Session.get('checkout') === checkoutDict.RECHARGE ||
+		Session.get('checkout') === checkoutDict.RECHARGE_OLD
+	)
+}
 
 export const buildLink = (text, link) =>
 	`<a href="${link}" target="_blank">${text}</a>`
 
 export const startingRecharge = () =>
-	Session.get('checkout') === 'Recharge'
+	isRechargeCheckout()
 		? ` You then need to add the ${buildLink(
 				'Recharge connection',
 				'https://help.littledata.io/posts/recharge-integration-setup-guide/'
@@ -30,7 +36,8 @@ export const attributeName = () => {
 	return ''
 }
 
-const keyName = () => (Session.get('checkout') === 'Recharge' ? 'name' : 'key')
+const keyName = () =>
+	Session.get('checkout') === checkoutDict.SHOPIFY ? 'key' : 'name'
 
 export const attributesObject = () => {
 	const always = `{ ${keyName()}: "${attributeName()}", value: "${Session.get(
@@ -65,10 +72,13 @@ export const linkToFunction = () => {
 	return `https://github.com/littledata/headless-shopify-demo/blob/master/client/buyNow/${getClientFunctionName}.js`
 }
 
-export const attributesArray = () =>
-	Session.get('checkout') === 'Recharge'
-		? 'order_attributes'
-		: 'customAttributes'
+export const attributesArray = () => {
+	const checkout = Session.get('checkout')
+	console.log(checkout)
+	if (checkout === checkoutDict.SHOPIFY) return 'customAttributes'
+	if (checkout === checkoutDict.RECHARGE_OLD) return 'note_attributes'
+	if (checkout === checkoutDict.RECHARGE) return 'order_attributes'
+}
 
 export const segmentWriteKey = () =>
 	Session.get('platform') === 'Segment'

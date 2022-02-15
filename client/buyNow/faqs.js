@@ -1,3 +1,4 @@
+import { checkoutDict } from '../../lib/constants'
 import {
 	buildLink,
 	appLink,
@@ -13,26 +14,26 @@ import {
 } from './helpers'
 
 const asterix = () =>
-	Session.get('checkout') === 'Recharge'
-		? `<super>*</super> Alternatively you could pass ${buildLink(
-				'parameters to the cart page',
-				'https://support.rechargepayments.com/hc/en-us/articles/360041127093-Using-cart-attributes-and-UTM-parameters-in-URLs'
-		  )} `
-		: `<super>*</super> Alternatively you could set these <code>attributes</code> via the ${buildLink(
+	Session.get('checkout') === checkoutDict.SHOPIFY
+		? `<super>*</super> Alternatively you could set these <code>attributes</code> via the ${buildLink(
 				'Cart API',
 				'https://shopify.dev/docs/themes/ajax-api/reference/cart'
 		  )}, which then gets passed into the checkout`
+		: `<super>*</super> Alternatively you could pass ${buildLink(
+				'parameters to the cart page',
+				'https://support.rechargepayments.com/hc/en-us/articles/360041127093-Using-cart-attributes-and-UTM-parameters-in-URLs'
+		  )} `
 
 const stepFourRecharge = () =>
-	Session.get('checkout') === 'Recharge'
-		? `See Recharge docs for how to use the ${buildLink(
-				'checkout API',
-				'https://developer.rechargepayments.com/2021-11/checkouts/checkout_object'
-		  )} to set the <code>${attributesArray()}</code> as <code>${attributesObject()}</code>. <super>*</super>`
-		: `In ${buildLink(
+	Session.get('checkout') === checkoutDict.SHOPIFY
+		? `In ${buildLink(
 				'this NodeJS example',
 				'https://github.com/littledata/headless-shopify-demo/blob/master/server/checkout/createShopifyCheckout.js'
 		  )} see how we set the checkout ${attributesArray()} as <code>${attributesObject()}</code>. <super>*</super>`
+		: `See Recharge docs for how to use the ${buildLink(
+				'checkout API',
+				'https://developer.rechargepayments.com/2021-11/checkouts/checkout_object'
+		  )} to set the <code>${attributesArray()}</code> as <code>${attributesObject()}</code>. <super>*</super>`
 
 const segmentToGA = () =>
 	Session.get('platform') === 'Segment'

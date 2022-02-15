@@ -12,13 +12,13 @@
 						{{{message}}}
 					{{else}}
 						This button has the {{idCalled}} ({{clientId}}) as a data attribute, 
-                        and clicking will {{#unless sendClientId}}<strong>NOT</strong> {{/unless}}
-                        send this with 
+                        and clicking BUY NOW will {{#unless sendClientId}}<strong>NOT</strong> {{/unless}}
+                        send this to our server to add to the 
                         {{#if recharge}}
-                            the URL parameters to be added to the Recharge cart
+                            Recharge
                         {{else}}
-                            the Shopify checkout
-                        {{/if}}.
+                            Shopify
+                        {{/if}} checkout after the checkout is created.
 					{{/if}}
 				</div>
 				<button class="button buy-now" data-color="accent" data-clientid="{{clientId}}" data-variant="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMzQ5ODQyMDcwNzQ1OQ==">

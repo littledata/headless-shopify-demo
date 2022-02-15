@@ -1,3 +1,5 @@
+import { checkoutDict } from '../../lib/constants'
+
 Template.header.helpers({
 	type() {
 		return this.type || 'simple'
@@ -26,8 +28,17 @@ Template.header.helpers({
 	segment() {
 		return Session.get('platform') === 'Segment'
 	},
-	recharge() {
-		return Session.get('checkout') === 'Recharge'
+	isRecharge() {
+		return Session.get('checkout') === checkoutDict.RECHARGE
+	},
+	isRechargeOld() {
+		return Session.get('checkout') === checkoutDict.RECHARGE_OLD
+	},
+	isShopify() {
+		return Session.get('checkout') === checkoutDict.SHOPIFY
+	},
+	checkoutName(name) {
+		return checkoutDict[name]
 	},
 })
 
