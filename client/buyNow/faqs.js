@@ -30,7 +30,7 @@ const stepFourRecharge = () =>
 				'this NodeJS example',
 				'https://github.com/littledata/headless-shopify-demo/blob/master/server/checkout/createShopifyCheckout.js'
 		  )} see how we set the checkout ${attributesArray()} as <code>${attributesObject()}</code>. <super>*</super>`
-		: `See Recharge docs for how to use the ${buildLink(
+		: `Use the Recharge ${buildLink(
 				'checkout API',
 				'https://developer.rechargepayments.com/2021-11/checkouts/checkout_object'
 		  )} to set the <code>${attributesArray()}</code> as <code>${attributesObject()}</code>. <super>*</super>`
@@ -83,10 +83,10 @@ export const faqs = () => [
 		)} before the user clicks 'Add to cart', or try the 'Buy Now' button above to see it in action. ${nacelle()}`,
 	},
 	{
-		heading: `4. Send that ${idCalled()} in checkout ${attributesArray()}`,
+		heading: `4. Add this ${idCalled()} to checkout ${attributesArray()}`,
 		description: `${Session.get(
 			'checkout'
-		)} allows you to add a <code>${attributesArray()}</code> array to the checkout. ${stepFourRecharge()}`,
+		)} allows you to update the checkout <code>${attributesArray()}</code> array after a checkout ID is created. ${stepFourRecharge()}`,
 	},
 	{
 		heading: '5. Checkout steps and orders are linked to users',
