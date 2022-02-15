@@ -1,0 +1,102 @@
+version: 2.1
+
+orbs:
+    slack: circleci/slack@4.4.2
+    node: circleci/node@4.5.1
+    browser-tools: circleci/browser-tools@1.1.3
+    ld-common-circleci: littledata/ld-common-circleci@0.0.23
+
+slack-notifications: &slack-notifications
+    post-steps:
+        - ld-common-circleci/notify-fail
+
+commands:
+    install_meteor:
+        steps:
+            - run: curl https://install.meteor.com | /bin/sh
+
+jobs:
+    install_npm:
+        docker:
+            - image: circleci/node:12
+        steps:
+            - checkout
+            - browser-tools/install-chrome
+            - browser-tools/install-chromedriver
+            - run:
+                  name: Authenticate with registry
+                  command: echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN" >> ./.npmrc
+            - restore_cache:
+                  keys:
+                      - deps-{{ checksum "package-lock.json" }}
+            - node/install-packages
+            - save_cache:
+                  key: deps-{{ checksum "package-lock.json" }}
+                  paths:
+                      - node_modules
+    lint:
+        docker:
+            - image: circleci/node:12
+        steps:
+            - checkout
+            - restore_cache:
+                  keys:
+                      - deps-{{ checksum "package-lock.json" }}
+            - run: CI=true npm run lint
+    deploy: &deploy
+        parameters:
+            channel:
+                type: string
+                default: $SLACK_DEFAULT_CHANNEL
+            target:
+                type: string
+            prod:
+                type: boolean
+                default: false
+            settings:
+                type: string
+        docker:
+            - image: circleci/node:12
+        steps:
+            - checkout
+            - run:
+                  name: Authenticate with registry
+                  command: echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN" >> ./.npmrc
+            - restore_cache:
+                  keys:
+                      - deps-{{ checksum "package-lock.json" }}
+            - install_meteor
+            - run: echo $DEPLOYMENT_TOKEN > deployment_token.json
+            - run:
+                  command: meteor deploy << parameters.target >> --settings << parameters.settings >> --owner littledata --deploy-polling-timeout 1500000
+                  no_output_timeout: 30m
+                  environment:
+                      METEOR_DISABLE_OPTIMISTIC_CACHING: 1
+                      DEPLOY_HOSTNAME: galaxy.meteor.com
+                      METEOR_SESSION_FILE: deployment_token.json
+            - ld-common-circleci/notify:
+                  channel: << parameters.channel >>
+    deploy_prod:
+        <<: *deploy
+
+workflows:
+    main:
+        jobs:
+            - install_npm
+            - lint:
+                  <<: *slack-notifications
+                  requires:
+                      - install_npm
+            - deploy_prod:
+                  <<: *slack-notifications
+                  channel: $SLACK_PROD_CHANNEL
+                  target: headlessdemo.littledata.io
+                  settings: settings.json
+                  prod: true
+                  requires:
+                      - lint
+                      - install_npm
+                  filters:
+                      branches:
+                          only: master
+                  context: production
