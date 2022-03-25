@@ -66,7 +66,7 @@ jobs:
             - install_meteor
             - run: echo $DEPLOYMENT_TOKEN > deployment_token.json
             - run:
-                  command: meteor deploy << parameters.target >> --settings << parameters.settings >> --owner littledata --deploy-polling-timeout 1500000
+                  command: meteor deploy << parameters.target >> --settings << parameters.settings >> --owner littledata --deploy-polling-timeout 1500000 --owner littledata
                   no_output_timeout: 30m
                   environment:
                       METEOR_DISABLE_OPTIMISTIC_CACHING: 1
