@@ -10,8 +10,11 @@
 		
 			<div class="sub-section sub-panel text-center">
 	    		<div class="actions">
-	    			<button type="button" class="button-outlined price-range platform {{#unless segment}} selected{{/unless}}" data-platform="Google" data-color="contrast" data-size="small">Google Analytics</button>
+					<button type="button" class="button-outlined price-range platform {{#if ga4}} selected{{/if}}" data-platform="GA4" data-color="contrast" data-size="small">Google Analytics 4</button>
+	    			<button type="button" class="button-outlined price-range platform {{#if google}} selected{{/if}}" data-platform="Google" data-color="contrast" data-size="small">Universal Analytics</button>
 					<button type="button" class="button-outlined price-range platform {{#if segment}} selected{{/if}}" data-platform="Segment" data-color="contrast" data-size="small">Segment</button>
+					<button type="button" class="button-outlined price-range platform {{#if facebook}} selected{{/if}}" data-platform="Facebook CAPI" data-color="contrast" data-size="small">Facebook CAPI</button>
+
 	    		</div>
 	    	</div>
 	    	<div class="sub-section sub-panel text-center">

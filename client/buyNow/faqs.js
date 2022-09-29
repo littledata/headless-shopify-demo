@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { checkoutDict } from '../../lib/constants'
 import {
 	buildLink,
@@ -43,12 +44,6 @@ const segmentToGA = () =>
 		  )} in "device mode" in Segment.`
 		: ''
 
-const nacelle = () =>
-	` Using Nacelle? There is an ${buildLink(
-		'NPM package',
-		'https://www.npmjs.com/package/@nacelle/nacelle-littledata-nuxt-module'
-	)} to do this.`
-
 const preCheckoutTracking = () =>
 	`As a further improvement you could add event tracking for pre-checkout browsing behavior (e.g. Track clicks of the Buy button). Follow the ${buildLink(
 		'Enhanced Ecommerce',
@@ -80,10 +75,10 @@ export const faqs = () => [
 			linkToFunction()
 		)} for ${Session.get(
 			'platform'
-		)} before the user clicks 'Add to cart', or try the 'Buy Now' button above to see it in action. ${nacelle()}`,
+		)} before the user clicks 'Add to cart', or try the 'Buy Now' button above to see it in action.`,
 	},
 	{
-		heading: `4. Add this ${idCalled()} to checkout ${attributesArray()}`,
+		heading: `4. Add these idenfiers to checkout ${attributesArray()}`,
 		description: `${Session.get(
 			'checkout'
 		)} allows you to update the checkout <code>${attributesArray()}</code> array after a checkout ID is created. ${stepFourRecharge()}`,

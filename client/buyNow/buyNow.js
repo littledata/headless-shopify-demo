@@ -1,7 +1,7 @@
 import { $ } from 'meteor/jquery'
 import { getGoogleClientId } from './getGoogleClientId'
 import { getSegmentAnonymousId } from './getSegmentAnonymousId'
-import { idCalled, attributeName, isRechargeCheckout } from './helpers'
+import { idCalled, attributesInUrlParams, isRechargeCheckout } from './helpers'
 import { faqs } from './faqs'
 import { domain } from '/lib/constants'
 import './buyNow.html'
@@ -15,9 +15,10 @@ Template.buyNow.onCreated(function() {
 	instance.autorun(() => {
 		Session.get('tryAgain')
 		const callFunction =
-			Session.get('platform') === 'Google'
-				? getGoogleClientId
-				: getSegmentAnonymousId
+			Session.get('platform') === 'Segment'
+				? getSegmentAnonymousId
+				: getGoogleClientId
+
 		callFunction()
 			.then(clientId => {
 				if (clientId) {
@@ -56,7 +57,7 @@ Template.buyNow.events({
 
 		if (isRechargeCheckout()) {
 			//Recharge checkout needs to come from Shopify storefront
-			const cartURL = `https://${domain}/cart?attribute[${attributeName()}]=${clientId}`
+			const cartURL = `https://${domain}/cart?${attributesInUrlParams()}`
 			document.location.href = cartURL
 		}
 
