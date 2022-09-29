@@ -23,3 +23,33 @@ export const getGoogleClientId = () => {
 		})
 	})
 }
+
+export const parseGA4Cookie = cookieName => {
+	const cookie = getCookie(cookieName)
+	if (!cookie) return 'GA4_SESSION_HERE'
+
+	return getCookie(cookie)
+		.split('.')
+		.splice(2, 1)
+		.join()
+}
+
+const getCookie = name => {
+	if (document.cookie.length > 0) {
+		const cookieStart = document.cookie.indexOf(`${name}=`)
+
+		if (cookieStart !== -1) {
+			const valueStart = cookieStart + name.length + 1
+			let cookieEnd = document.cookie.indexOf(';', valueStart)
+
+			if (cookieEnd === -1) {
+				cookieEnd = document.cookie.length
+			}
+			const cookie = document.cookie.substring(valueStart, cookieEnd)
+
+			return cookie
+		}
+	}
+
+	return ''
+}

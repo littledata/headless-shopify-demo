@@ -1,4 +1,4 @@
-import { checkoutDict } from '../../lib/constants'
+import { checkoutDict, platformDict } from '../../lib/constants'
 
 Template.header.helpers({
 	type() {
@@ -26,7 +26,16 @@ Template.header.helpers({
 		)
 	},
 	segment() {
-		return Session.get('platform') === 'Segment'
+		return Session.get('platform') === platformDict.SEGMENT
+	},
+	google() {
+		return Session.get('platform') === platformDict.UA
+	},
+	ga4() {
+		return Session.get('platform') === platformDict.GA4
+	},
+	facebook() {
+		return Session.get('platform') === platformDict.FACEBOOK
 	},
 	isRecharge() {
 		return Session.get('checkout') === checkoutDict.RECHARGE

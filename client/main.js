@@ -2,7 +2,7 @@ import { checkoutDict } from '../lib/constants'
 import './body.html'
 
 const { href } = document.location
-const platform = href.includes('segment') ? 'Segment' : 'Google'
+const platform = href.includes('segment') ? 'Segment' : 'GA4'
 const checkout = href.includes('recharge')
 	? checkoutDict.RECHARGE
 	: checkoutDict.SHOPIFY
