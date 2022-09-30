@@ -88,7 +88,7 @@ workflows:
             - deploy_prod:
                   <<: *slack-notifications
                   channel: $SLACK_PROD_CHANNEL
-                  target: headless-shopify-demo.littledata.io
+                  target: headlessdemo.littledata.io
                   settings: settings.json
                   prod: true
                   requires:
