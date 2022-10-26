@@ -10,9 +10,12 @@
 
 const fetchClientId = async ({
 	shopifyToken,
-	ga3PropertyId = undefined,
-	ga4MeasurementId = undefined,
+	ga3PropertyId,
+	ga4MeasurementId,
 }) => {
+	if (!shopifyToken) {
+		return
+	}
 	const ldPayload = {}
 
 	const getGaIds = async (id, type) => {
@@ -66,7 +69,7 @@ const fetchClientId = async ({
 		xhr.send(JSON.stringify(payload))
 	}
 
-	if (shopifyToken) ldPayload.cartID = shopifyToken
+	ldPayload.cartID = shopifyToken
 	if (window.fbq?.loaded) getFbId()
 	if (ga3PropertyId || ga4MeasurementId) {
 		await getGaIds(ga3PropertyId || ga4MeasurementId, 'client_id')
