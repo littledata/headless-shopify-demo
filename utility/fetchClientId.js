@@ -80,7 +80,7 @@ const fetchClientId = async ({
 	await sendToLittledata(ldPayload)
 }
 
-/** Examples of how to run this function depending on the trackers configuration.
+/** Examples of how to run this function depending on the trackers' configuration.
  * Please replace the GA IDs with your own and fill in the Shopify Token dynamically.
  *
  * GA3
@@ -93,7 +93,7 @@ const fetchClientId = async ({
  * fetchClientId({shopifyToken:'a421a9768b6c9664dcff685cdfc6a38a'})
  *
  * GA3+FB		// note that you don't need to add any additional arguments besides the Token and the GA ID
- * fetchClientId('a421a9768b6c9664dcff685cdfc6a38a', 'UA-92368602-105')
+ * fetchClientId({shopifyToken:'a421a9768b6c9664dcff685cdfc6a38a', ga3PropertyId: 'UA-92368602-105')
  *
  * GA3+GA4+FB	// note that you don't need to add any additional arguments besides the Token and the GA IDs
  * fetchClientId({shopifyToken:'a421a9768b6c9664dcff685cdfc6a38a', ga3PropertyId: 'UA-92368602-105', ga4MeasurementId: 'G-W526SMPNGT'})
