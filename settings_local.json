@@ -1,0 +1,6 @@
+{ "env":
+	{
+		"METEOR_ENV" : "development",
+		"ROOT_URL": "https://localhost:3000"
+	}
+}

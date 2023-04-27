@@ -4,10 +4,9 @@ import { createShopifyCheckout } from './createShopifyCheckout'
 
 Meteor.methods({
 	async createShopifyCheckout(params) {
-		const { variantId, clientId, platform } = params
+		const { variantId, shopifyNotes } = params
 		check(variantId, String) //Storefront variant ID
-		check(clientId, Match.Maybe(String))
-		check(platform, String)
+		check(shopifyNotes, [Object]) //Shopify notes
 
 		return createShopifyCheckout(params)
 	},

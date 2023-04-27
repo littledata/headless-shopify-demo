@@ -1,7 +1,12 @@
 import { $ } from 'meteor/jquery'
-import { getGoogleClientId } from './getGoogleClientId'
-import { getSegmentAnonymousId } from './getSegmentAnonymousId'
-import { idCalled, attributesInUrlParams, isRechargeCheckout } from './helpers'
+import { redirectToShopifyCheckout } from '../utility/redirectToShopifyCheckout'
+import { fetchClientIds } from '../utility/fetchClientIds'
+import {
+	idCalled,
+	attributesInUrlParams,
+	isRechargeCheckout,
+	isSessionIdCalled,
+} from './helpers'
 import { faqs } from './faqs'
 import { domain } from '/lib/constants'
 import './buyNow.html'
@@ -14,30 +19,40 @@ Template.buyNow.onCreated(function() {
 	const instance = this
 	instance.autorun(() => {
 		Session.get('tryAgain')
-		const callFunction =
-			Session.get('platform') === 'Segment'
-				? getSegmentAnonymousId
-				: getGoogleClientId
 
-		callFunction()
-			.then(clientId => {
-				if (clientId) {
-					Session.set('clientId', clientId)
-				} else {
-					//trigger autorun again
-					Session.set('tryAgain', true)
-				}
-			})
-			.catch(err => {
-				instance.message.set(err.message)
-			})
+		const params = {}
+		switch (Session.get('platform')) {
+			case 'Segment':
+				params.segmentWriteKey = '1MTr5E0mmf92XtjsOhAmPWHq6D8aHBGC'
+				Session.set('notesKey', '_segment-clientID')
+				break
+			case 'GA4':
+				params.ga4MeasurementId = 'G-KVCYFM7ZSM'
+				Session.set('notesKey', '_google-clientID')
+				break
+			case 'Google':
+				params.ga3PropertyId = 'UA-92368602-75'
+				Session.set('notesKey', '_google-clientID')
+				break
+			case 'Facebook CAPI':
+				params.fbPixelId = '123123'
+				Session.set('notesKey', '_fbp-clientID')
+				break
+			default:
+				break
+		}
+
+		localStorage.removeItem('littledataIDs')
+		fetchClientIds(params)
 	})
 })
 
 Template.buyNow.helpers({
 	message: () => Template.instance().message.get(),
 	idCalled,
+	isSessionIdCalled,
 	clientId: () => Session.get('clientId'),
+	sessionId: () => Session.get('sessionId'),
 	checkingOut: () => Template.instance().checkingOut.get(),
 	heading: () => 'Do this on your headless store',
 	faqs,
@@ -46,47 +61,15 @@ Template.buyNow.helpers({
 })
 
 Template.buyNow.events({
-	'click .buy-now': function(event, template) {
+	'click .buy-now': (event, template) => {
 		const variantId = $(event.target).data('variant')
 		template.checkingOut.set(true)
-		const platform = Session.get('platform').toLowerCase()
-		let clientId
-		if (Session.get('sendClientId') !== false) {
-			clientId = $(event.target).data('clientid')
-		}
 
 		if (isRechargeCheckout()) {
 			//Recharge checkout needs to come from Shopify storefront
 			const cartURL = `https://${domain}/cart?${attributesInUrlParams()}`
 			document.location.href = cartURL
 		}
-
-		/**
-		 * @param {string} variantId Shopify variant ID
-		 * @param {string} clientId browser identifier, picked up from cookie
-		 * @param {string} platform the analytics platform generating the clientId - 'google' or 'segment'
-		 * @returns {string} returns the checkout URL
-		 */
-		Meteor.call(
-			'createShopifyCheckout',
-			{ variantId, clientId, platform },
-			(error, result) => {
-				if (error) {
-					template.checkingOut.set(false)
-					return template.message.set(error.message)
-				}
-				const addedClientId = clientId
-					? `We set '${platform}-clientID' as ${clientId} on the checkout attributes. `
-					: 'sendClientId set to FALSE. '
-				template.message.set(
-					`<span class="red">${addedClientId}Redirecting you to the checkout in 8 seconds</span>`
-				)
-				setTimeout(() => {
-					//wait 10 seconds to show the message
-					template.checkingOut.set(false)
-					document.location.href = result
-				}, 8000)
-			}
-		)
+		redirectToShopifyCheckout(variantId, template)
 	},
 })

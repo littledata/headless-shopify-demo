@@ -8,13 +8,13 @@ import {
 	idCalled,
 	ecommerceDocLink,
 	trackingScriptCode,
-	linkToFunction,
 	startingRecharge,
 	attributesArray,
 	segmentWriteKey,
+	helpLink,
 } from './helpers'
 
-const asterix = () =>
+const asterisk = () =>
 	Session.get('checkout') === checkoutDict.SHOPIFY
 		? `<super>*</super> Alternatively you could set these <code>attributes</code> via the ${buildLink(
 				'Cart API',
@@ -30,11 +30,11 @@ const stepFourRecharge = () =>
 		? `In ${buildLink(
 				'this NodeJS example',
 				'https://github.com/littledata/headless-shopify-demo/blob/master/server/checkout/createShopifyCheckout.js'
-		  )} see how we set the checkout ${attributesArray()} as <code>${attributesObject()}</code>. <super>*</super>`
+		  )} see how we set the checkout ${attributesArray()}<super>*</super> as <code>${attributesObject()}</code>.`
 		: `Use the Recharge ${buildLink(
 				'checkout API',
 				'https://developer.rechargepayments.com/2021-11/checkouts/checkout_object'
-		  )} to set the <code>${attributesArray()}</code> as <code>${attributesObject()}</code>. <super>*</super>`
+		  )}<super>*</super> to set the <code>${attributesArray()}</code> as <code>${attributesObject()}</code>.`
 
 const segmentToGA = () =>
 	Session.get('platform') === 'Segment'
@@ -45,10 +45,16 @@ const segmentToGA = () =>
 		: ''
 
 const preCheckoutTracking = () =>
-	`As a further improvement you could add event tracking for pre-checkout browsing behavior (e.g. Track clicks of the Buy button). Follow the ${buildLink(
+	`As a further improvement you could add event tracking for pre-checkout browsing behavior (e.g. track clicks of the Add to Cart button, Collection or Product page views). Follow the ${buildLink(
 		'Enhanced Ecommerce',
 		ecommerceDocLink()
-	)} specs in ${Session.get('platform')}.`
+	)} specs for ${Session.get('platform')}.`
+
+const sendToTM = () =>
+	`For added precision and tracking reliability, you should also send the received checkout ID to the Littledata server. ${buildLink(
+		'In this example',
+		'https://github.com/littledata/headless-shopify-demo/blob/master/client/utility/redirectToShopifyCheckout.js'
+	)} you can see how we are doing that by using <code>sendCheckoutToLittledata</code> method from the Littledata SDK.`
 
 export const faqs = () => [
 	{
@@ -58,7 +64,7 @@ export const faqs = () => [
 			appLink()
 		)} to your store, and choose the ${buildLink(
 			'manual install route',
-			'https://help.littledata.io/posts/littledata-shopify-install-guide/#b-manual-install'
+			helpLink()
 		)} and check the box for headless setup. That skips adding our storefront tracking script.${segmentWriteKey()}${startingRecharge()}`,
 	},
 	{
@@ -66,22 +72,26 @@ export const faqs = () => [
 		description: `Add the ${buildLink(
 			`${appName()} tracking tag`,
 			trackingScriptCode()
-		)} to the <code>< head ></code> of your custom front-end. This library creates a ${idCalled()} on your storefront which Littledata can link with checkouts and orders from Shopify.${segmentToGA()}`,
+		)} to the <code>< head ></code> of your custom front-end. This library creates the ${idCalled()} on your storefront which Littledata can link with checkouts and orders from Shopify.${segmentToGA()}`,
 	},
 	{
 		heading: `3. Get the ${idCalled()} from the browser`,
-		description: `For Littledata to link server events with browser pageviews, you need to get the ${idCalled()} from the browser. See how we ${buildLink(
+		description: `For Littledata to link server events with browser pageviews, you need to get the ${idCalled()} from the browser. To accomplish that easily, you can use ${buildLink(
+			'Littledata Headless Shopify SDK',
+			'https://www.npmjs.com/package/@littledata/headless-shopify-sdk'
+		)}. You need to call the <code>fetchClientIds</code> method after you load the ${appName()} tracking tag. This method returns <code>customAttributes</code> array prepared for sending to Shopify Checkout. See how we ${buildLink(
 			`get the ${idCalled()}`,
-			linkToFunction()
-		)} for ${Session.get(
-			'platform'
-		)} before the user clicks 'Add to cart', or try the 'Buy Now' button above to see it in action.`,
+			'https://github.com/littledata/headless-shopify-demo/blob/master/client/utility/fetchClientIds.js'
+		)} for ${appName()} before the user clicks 'Add to cart', or try the 'Buy Now' button above to see it in action. Also, please read the ${buildLink(
+			'Littledata SDK documentation',
+			'https://www.npmjs.com/package/@littledata/headless-shopify-sdk?activeTab=readme'
+		)} for the additional instructions and details about the setup.`,
 	},
 	{
-		heading: `4. Add these idenfiers to checkout ${attributesArray()}`,
+		heading: `4. Add these identifiers to checkout ${attributesArray()}`,
 		description: `${Session.get(
 			'checkout'
-		)} allows you to update the checkout <code>${attributesArray()}</code> array after a checkout ID is created. ${stepFourRecharge()}`,
+		)} allows you to update the checkout <code>${attributesArray()}</code> array only after a checkout ID is created. ${stepFourRecharge()} ${sendToTM()}`,
 	},
 	{
 		heading: '5. Checkout steps and orders are linked to users',
@@ -98,5 +108,5 @@ export const faqs = () => [
 			'https://www.littledata.io/app/enterprise'
 		)} are a popular option. Plus Plans include ${appName()} setup, audits, training and more.`,
 	},
-	{ heading: '', description: asterix() },
+	{ heading: '', description: asterisk() },
 ]

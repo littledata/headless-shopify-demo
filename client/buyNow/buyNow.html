@@ -11,17 +11,18 @@
 					{{#if message}}
 						{{{message}}}
 					{{else}}
-						This button has the {{idCalled}} ({{clientId}}) as a data attribute, 
-                        and clicking BUY NOW will {{#unless sendClientId}}<strong>NOT</strong> {{/unless}}
-                        send this to our server to add to the 
-                        {{#if recharge}}
-                            Recharge
-                        {{else}}
-                            Shopify
-                        {{/if}} checkout after the checkout is created.
+						This button has the {{idCalled}} ({{clientId}}{{#if isSessionIdCalled}} and {{sessionId}}) as data attributes,
+							{{else}}) as a data attribute, {{/if}}
+						and clicking BUY NOW will {{#unless sendClientId}}<strong>NOT</strong> {{/unless}}
+						send this to our server to add to the
+							{{#if recharge}}
+								Recharge
+							{{else}}
+								Shopify
+							{{/if}} checkout after the checkout is created.
 					{{/if}}
 				</div>
-				<button class="button buy-now" data-color="accent" data-clientid="{{clientId}}" data-variant="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMzQ5ODQyMDcwNzQ1OQ==">
+				<button class="button buy-now" data-color="accent" data-clientid="{{clientId}}" data-sessionid="{{sessionId}}" data-variant="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMzQ5ODQyMDcwNzQ1OQ==">
 					{{#if checkingOut}}
 						{{>_barLoader}}
 					{{else}}

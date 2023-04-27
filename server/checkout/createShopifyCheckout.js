@@ -2,14 +2,12 @@ import { storefrontAPI } from './storefrontAPI'
 
 /**
  * @param {string} variantId Shopify variant ID
- * @param {string} clientId browser identifier, picked up from cookie
- * @param {string} platform the analytics platform generating the clientId - 'google' or 'segment'
- * @returns {string} returns the checkout URL
+ * @param {array} shopifyNoteAttributes Shopify notes array received from the frontend
+ * @returns {string} passes the checkout URL and checkout ID back to frontend
  */
 export const createShopifyCheckout = async ({
 	variantId,
-	clientId,
-	platform, // 'google' or 'segment'
+	shopifyNoteAttributes,
 }) => {
 	// first create checkout with the chosen line items
 	const checkout = await storefrontAPI.checkout.create()
@@ -19,16 +17,10 @@ export const createShopifyCheckout = async ({
 		lineItemsToAdd(variantId)
 	)
 
-	if (clientId) {
-		const updateAttributes = {}
+	if (shopifyNoteAttributes) {
+		const updateAttributes = { customAttributes: shopifyNoteAttributes }
 
-		updateAttributes.customAttributes = [
-			//this is the attribute Littledata's webhook will pick up
-			// e.g. { key: 'google-clientID', value: '1234567.1234567'}
-			{ key: `${platform}-clientID`, value: clientId },
-		]
-
-		// then add custom attributes to checkout
+		// adding custom attributes to Shopify checkout
 		// https://shopify.github.io/js-buy-sdk/#updating-checkout-attributes
 		await storefrontAPI.checkout.updateAttributes(
 			checkoutId,
@@ -37,7 +29,7 @@ export const createShopifyCheckout = async ({
 	}
 
 	// finally direct user back to the checkout page
-	return checkout.webUrl
+	return { url: checkout.webUrl, id: checkout.id }
 }
 
 function lineItemsToAdd(variantId) {

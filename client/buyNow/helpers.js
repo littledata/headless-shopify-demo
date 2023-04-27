@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
-import { checkoutDict, platformDict, measurementId } from '../../lib/constants'
-import { parseGA4Cookie } from './getGoogleClientId'
+import { checkoutDict, platformDict } from '../../lib/constants'
 
 export const isRechargeCheckout = () => {
 	return (
@@ -20,6 +19,13 @@ export const startingRecharge = () =>
 		  )} in Littledata.`
 		: ''
 
+export const helpLink = () =>
+	`https://help.littledata.io/posts/${
+		Session.get('platform') === platformDict.SEGMENT
+			? 'headless-shopify-tracking-for-segment'
+			: 'install-guide-google-analytics-4-connection'
+	}`
+
 export const appLink = () =>
 	`https://apps.shopify.com/${
 		Session.get('platform') === platformDict.SEGMENT
@@ -27,26 +33,42 @@ export const appLink = () =>
 			: 'littledata'
 	}`
 
-export const appName = () =>
-	Session.get('platform') === platformDict.SEGMENT
-		? platformDict.SEGMENT
-		: 'Google Analytics'
+export const appName = () => {
+	switch (Session.get('platform')) {
+		case platformDict.SEGMENT:
+			return 'Segment'
+		case platformDict.GA4:
+			return 'Google Analytics 4'
+		case platformDict.FACEBOOK:
+			return 'Facebook'
+		case platformDict.UA:
+			return 'Google Analytics'
+		default:
+			return ''
+	}
+}
 
 export const attributesNeeded = () => {
 	const platform = Session.get('platform')
-	const attributes = { 'google-clientID': 'GA_COOKIE_CLIENTID' }
+	const attributes = {}
 	if (platform === platformDict.SEGMENT) {
-		attributes['segment-clientID'] =
-			window.analytics.user().anonymousId() || 'SEGMENT_ANONYMOUSID'
+		attributes['_segment-clientID'] =
+			Session.get('clientId') || 'SEGMENT_ANONYMOUSID'
 	}
 	if (platform === platformDict.GA4) {
-		attributes['ga4session-clientID'] = parseGA4Cookie(
-			`_ga_${measurementId}`
-		)
+		attributes['_ga4session-clientID'] =
+			Session.get('sessionId') || 'GA4_SESSION_HERE'
+		attributes['_google-clientID'] =
+			Session.get('clientId') || 'GA_COOKIE_CLIENTID'
+	}
+	if (platform === platformDict.UA) {
+		attributes['_google-clientID'] =
+			Session.get('clientId') || 'GA_COOKIE_CLIENTID'
 	}
 	if (platform === platformDict.FACEBOOK) {
-		attributes['fbp-clientID'] = 'FBP_COOKIE_VALUE'
-		attributes['fbc-clientID'] = 'FBC_COOKIE_VALUE'
+		attributes['_fbp-clientID'] =
+			Session.get('clientId') || 'FBP_COOKIE_VALUE'
+		attributes['_fbc-clientID'] = 'FBC_COOKIE_VALUE'
 	}
 	return attributes
 }
@@ -70,10 +92,19 @@ export const attributesInUrlParams = () => {
 	return params.slice(0, params.length - 1) // remove trailing &
 }
 
-export const idCalled = () =>
-	Session.get('platform') === platformDict.SEGMENT
-		? 'anonymous ID'
-		: 'client ID'
+export const idCalled = () => {
+	switch (Session.get('platform')) {
+		case platformDict.SEGMENT:
+			return 'anonymous ID'
+		case platformDict.GA4:
+			return 'client and session IDs'
+		default:
+			return 'client ID'
+	}
+}
+
+export const isSessionIdCalled = () =>
+	Session.get('platform') === platformDict.GA4 || null
 
 export const ecommerceDocLink = () => {
 	const platform = Session.get('platform')
@@ -92,15 +123,6 @@ export const ecommerceDocLink = () => {
 export const trackingScriptCode = () =>
 	'https://github.com/littledata/headless-shopify-demo/blob/master/client/head.html'
 
-export const linkToFunction = () => {
-	const getClientFunctionName =
-		Session.get('platform') === platformDict.SEGMENT
-			? 'getSegmentAnonymousId'
-			: 'getGoogleClientId'
-
-	return `https://github.com/littledata/headless-shopify-demo/blob/master/client/buyNow/${getClientFunctionName}.js`
-}
-
 export const attributesArray = () => {
 	const checkout = Session.get('checkout')
 	if (checkout === checkoutDict.SHOPIFY) return 'customAttributes'
@@ -115,3 +137,46 @@ export const segmentWriteKey = () =>
 				'https://help.littledata.io/posts/segment-installation-guide/'
 		  )}.`
 		: ''
+
+export const showUserMessageAfterBuyClicked = template => {
+	let clientId
+	let sessionId
+	if (Session.get('sendClientId') !== false) {
+		clientId = Session.get('clientId')
+		sessionId = Session.get('sessionId')
+	}
+	const platform = Session.get('platform').toLowerCase()
+	const cidString = clientId
+		? `We set '_${platform}-clientID' as ${clientId} on the checkout attributes. `
+		: null
+	const ga4String = sessionId
+		? `We set '_ga4session-clientID' as ${sessionId} and '_google-clientID' as ${clientId} on the checkout attributes. `
+		: null
+	const addedClientId =
+		ga4String || cidString || 'sendClientId set to FALSE. '
+	template.message.set(
+		`<span class="red">${addedClientId}Redirecting you to the checkout in 8 seconds</span>`
+	)
+}
+
+export const saveClientIdToMeteorSession = shopifyNotes => {
+	const notesKey = Session.get('notesKey')
+	Session.set(
+		'clientId',
+		shopifyNotes.find(noteArr => noteArr.key === notesKey)?.value
+	)
+}
+
+export const saveSessionIdToMeteorSession = shopifyNotes => {
+	const sessionIdValue =
+		Session.get('platform') === 'GA4'
+			? shopifyNotes.find(
+					noteArr => noteArr.key === '_ga4session-clientID'
+			  )?.value
+			: null
+
+	Session.set('sessionId', sessionIdValue)
+}
+
+export const saveShopifyNotesToMeteorSession = shopifyNotes =>
+	Session.set('shopifyNotes', shopifyNotes)
