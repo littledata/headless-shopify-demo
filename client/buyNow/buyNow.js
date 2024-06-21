@@ -1,12 +1,7 @@
 import { $ } from 'meteor/jquery'
 import { redirectToShopifyCheckout } from '../utility/redirectToShopifyCheckout'
 import { fetchClientIds } from '../utility/fetchClientIds'
-import {
-	idCalled,
-	attributesInUrlParams,
-	isRechargeCheckout,
-	isSessionIdCalled,
-} from './helpers'
+import { idCalled, attributesInUrlParams, isSessionIdCalled } from './helpers'
 import { faqs } from './faqs'
 import { domain } from '/lib/constants'
 import './buyNow.html'
@@ -56,7 +51,6 @@ Template.buyNow.helpers({
 	checkingOut: () => Template.instance().checkingOut.get(),
 	heading: () => 'Do this on your headless store',
 	faqs,
-	recharge: () => isRechargeCheckout(),
 	sendClientId: () => Session.get('sendClientId'),
 })
 
@@ -65,11 +59,6 @@ Template.buyNow.events({
 		const variantId = $(event.target).data('variant')
 		template.checkingOut.set(true)
 
-		if (isRechargeCheckout()) {
-			//Recharge checkout needs to come from Shopify storefront
-			const cartURL = `https://${domain}/cart?${attributesInUrlParams()}`
-			document.location.href = cartURL
-		}
 		redirectToShopifyCheckout(variantId, template)
 	},
 })

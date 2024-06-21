@@ -1,23 +1,8 @@
 /* eslint-disable max-len */
 import { checkoutDict, platformDict } from '../../lib/constants'
 
-export const isRechargeCheckout = () => {
-	return (
-		Session.get('checkout') === checkoutDict.RECHARGE ||
-		Session.get('checkout') === checkoutDict.RECHARGE_OLD
-	)
-}
-
 export const buildLink = (text, link) =>
 	`<a href="${link}" target="_blank">${text}</a>`
-
-export const startingRecharge = () =>
-	isRechargeCheckout()
-		? ` You then need to add the ${buildLink(
-				'Recharge connection',
-				'https://help.littledata.io/posts/recharge-integration-setup-guide/'
-		  )} in Littledata.`
-		: ''
 
 export const helpLink = () =>
 	`https://help.littledata.io/posts/${
@@ -97,7 +82,9 @@ export const idCalled = () => {
 		case platformDict.SEGMENT:
 			return 'anonymous ID'
 		case platformDict.GA4:
-			return 'client and session IDs'
+			return 'client ID and session ID'
+		case platformDict.FACEBOOK:
+			return 'fbp'
 		default:
 			return 'client ID'
 	}
