@@ -8,7 +8,6 @@ import {
 	idCalled,
 	ecommerceDocLink,
 	trackingScriptCode,
-	startingRecharge,
 	attributesArray,
 	segmentWriteKey,
 	helpLink,
@@ -65,48 +64,47 @@ export const faqs = () => [
 		)} to your store, and choose the ${buildLink(
 			'manual install route',
 			helpLink()
-		)} and check the box for headless setup. That skips adding our storefront tracking script.${segmentWriteKey()}${startingRecharge()}`,
+		)} and check the box for headless setup. That skips adding our storefront tracking script.${segmentWriteKey()}`,
 	},
 	{
-		heading: `2. Add the ${appName()} tag`,
+		heading: `2. Decide if you need Littledata support`,
+		description: `For a fixed upfront fee our implementation engineers can work with your team to get the following steps right. Littledata’s ${buildLink(
+			'Plus Plans',
+			'https://www.littledata.io/plus'
+		)} also include ${appName()} setup, audits, training and more.`,
+	},
+	{
+		heading: `3. Add the ${appName()} tag`,
 		description: `Add the ${buildLink(
 			`${appName()} tracking tag`,
 			trackingScriptCode()
 		)} to the <code>< head ></code> of your custom front-end. This library creates the ${idCalled()} on your storefront which Littledata can link with checkouts and orders from Shopify.${segmentToGA()}`,
 	},
 	{
-		heading: `3. Get the ${idCalled()} from the browser`,
-		description: `For Littledata to link server events with browser pageviews, you need to get the ${idCalled()} from the browser. To accomplish that easily, you can use ${buildLink(
-			'Littledata Headless Shopify SDK',
+		heading: `4. Get the ${idCalled()} from the browser`,
+		description: `For Littledata to link server events with browser pageviews, you need to get the ${idCalled()} from the browser. To accomplish that easily, you can use Littledata's ${buildLink(
+			'Headless SDK',
 			'https://www.npmjs.com/package/@littledata/headless-shopify-sdk'
 		)}. You need to call the <code>fetchClientIds</code> method after you load the ${appName()} tracking tag. This method returns <code>customAttributes</code> array prepared for sending to Shopify Checkout. See how we ${buildLink(
 			`get the ${idCalled()}`,
 			'https://github.com/littledata/headless-shopify-demo/blob/master/client/utility/fetchClientIds.js'
-		)} for ${appName()} before the user clicks 'Add to cart', or try the 'Buy Now' button above to see it in action. Also, please read the ${buildLink(
-			'Littledata SDK documentation',
+		)} for ${appName()} before the user clicks 'Add to cart', or try the 'Buy Now' button above to see it in action. See the ${buildLink(
+			'SDK docs',
 			'https://www.npmjs.com/package/@littledata/headless-shopify-sdk?activeTab=readme'
-		)} for the additional instructions and details about the setup.`,
+		)} for the additional instructions.`,
 	},
 	{
-		heading: `4. Add these identifiers to checkout ${attributesArray()}`,
+		heading: `5. Add these identifiers to checkout ${attributesArray()}`,
 		description: `${Session.get(
 			'checkout'
 		)} allows you to update the checkout <code>${attributesArray()}</code> array only after a checkout ID is created. ${stepFourRecharge()} ${sendToTM()}`,
 	},
 	{
-		heading: '5. Checkout steps and orders are linked to users',
+		heading: '6. Checkout steps and orders are linked to users',
 		description: `Your headless setup is complete! Our servers pick up the ${buildLink(
 			'checkout',
 			'https://help.littledata.io/posts/shopify-checkout-funnel-updates/'
 		)} and order events via webhooks - you don't need any scripts on the checkout or thank you pages.  ${preCheckoutTracking()}`,
-	},
-	{ heading: '', description: '' },
-	{
-		heading: '',
-		description: `For additional help with headless tracking for Shopify Plus, Littledata’s ${buildLink(
-			'Plus Plans',
-			'https://www.littledata.io/app/enterprise'
-		)} are a popular option. Plus Plans include ${appName()} setup, audits, training and more.`,
 	},
 	{ heading: '', description: asterisk() },
 ]

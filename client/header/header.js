@@ -37,18 +37,6 @@ Template.header.helpers({
 	facebook() {
 		return Session.get('platform') === platformDict.FACEBOOK
 	},
-	isRecharge() {
-		return Session.get('checkout') === checkoutDict.RECHARGE
-	},
-	isRechargeOld() {
-		return Session.get('checkout') === checkoutDict.RECHARGE_OLD
-	},
-	isShopify() {
-		return Session.get('checkout') === checkoutDict.SHOPIFY
-	},
-	checkoutName(name) {
-		return checkoutDict[name]
-	},
 })
 
 Template.header.events({

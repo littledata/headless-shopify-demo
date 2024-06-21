@@ -1,27 +1,19 @@
 <template name="header">
 	<div class="header-section {{type}}">
-			<div class="header-no-background" style="background-image: url('/img/home/header-bars.png')"></div>
+			<div class="header-no-background"></div>
 		<div class="container">
 			<h1 data-color="{{color}}">{{heading}}</h1>
 			
 			{{# if description}}
-				<p data-color="{{color}}">{{description}}</p>
+				<h4 data-color="{{color}}">{{description}}</h4>
 			{{/ if }}
 		
 			<div class="sub-section sub-panel text-center">
 	    		<div class="actions">
-					<button type="button" class="button-outlined price-range platform {{#if ga4}} selected{{/if}}" data-platform="GA4" data-color="contrast" data-size="small">Google Analytics 4</button>
-	    			<button type="button" class="button-outlined price-range platform {{#if google}} selected{{/if}}" data-platform="Google" data-color="contrast" data-size="small">Universal Analytics</button>
-					<button type="button" class="button-outlined price-range platform {{#if segment}} selected{{/if}}" data-platform="Segment" data-color="contrast" data-size="small">Segment</button>
-					<button type="button" class="button-outlined price-range platform {{#if facebook}} selected{{/if}}" data-platform="Facebook CAPI" data-color="contrast" data-size="small">Facebook CAPI</button>
+					<button type="button" class="button-outlined price-range platform {{#if ga4}} selected{{/if}}" data-platform="GA4" data-color="contrast" data-size="small">Google Analytics</button>
+					<button type="button" class="button-outlined price-range platform {{#if segment}} selected{{/if}}" data-platform="Segment" data-color="contrast" data-size="small">Segment.com</button>
+					<button type="button" class="button-outlined price-range platform {{#if facebook}} selected{{/if}}" data-platform="Facebook CAPI" data-color="contrast" data-size="small">Meta CAPI</button>
 
-	    		</div>
-	    	</div>
-	    	<div class="sub-section sub-panel text-center">
-	    		<div class="actions">
-	    			<button type="button" class="button-outlined price-range checkout {{#if isShopify}} selected{{/if}}" data-platform="{{checkoutName 'SHOPIFY'}}" data-color="contrast" data-size="small">{{checkoutName 'SHOPIFY'}} Checkout</button>
-					<button type="button" class="button-outlined price-range checkout {{#if isRechargeOld}} selected{{/if}}" data-platform="{{checkoutName 'RECHARGE_OLD'}}" data-color="contrast" data-size="small">{{checkoutName 'RECHARGE_OLD'}}</button>
-					<button type="button" class="button-outlined price-range checkout {{#if isRecharge}} selected{{/if}}" data-platform="{{checkoutName 'RECHARGE'}}" data-color="contrast" data-size="small">{{checkoutName 'RECHARGE'}}</button>
 	    		</div>
 	    	</div>
     	</div>
