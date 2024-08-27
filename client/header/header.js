@@ -1,4 +1,4 @@
-import { checkoutDict, platformDict } from '../../lib/constants'
+import { platformDict } from '../../lib/constants'
 
 Template.header.helpers({
 	type() {
