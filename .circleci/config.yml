@@ -13,7 +13,7 @@ slack-notifications: &slack-notifications
 commands:
     install_meteor:
         steps:
-            - run: curl https://install.meteor.com | /bin/sh
+            - run: curl https://install.meteor.com?release=2.16 | /bin/sh
 
 jobs:
     install_npm:
