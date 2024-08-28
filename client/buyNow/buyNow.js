@@ -1,9 +1,8 @@
 import { $ } from 'meteor/jquery'
 import { redirectToShopifyCheckout } from '../utility/redirectToShopifyCheckout'
 import { fetchClientIds } from '../utility/fetchClientIds'
-import { idCalled, attributesInUrlParams, isSessionIdCalled } from './helpers'
+import { idCalled, isSessionIdCalled } from './helpers'
 import { faqs } from './faqs'
-import { domain } from '/lib/constants'
 import './buyNow.html'
 
 Template.buyNow.onCreated(function() {
